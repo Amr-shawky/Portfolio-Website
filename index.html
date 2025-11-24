@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amr Mohamed Shawky | Full Stack .NET Engineer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bgDark: '#0f0518',
+                        cardDark: '#1a1025',
+                        primary: '#a855f7',      // Purple
+                        secondary: '#ec4899',    // Pink
+                        dotnet: '#512BD4',       // .NET Purple
+                        accent: '#22d3ee',       // Cyan
+                        success: '#10b981',      // Green
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f0518;
+            color: white;
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 20px rgba(81, 43, 212, 0.6);
+        }
+        
+        .glow-box {
+            box-shadow: 0 0 15px rgba(81, 43, 212, 0.1); 
+            transition: all 0.3s ease;
+        }
+        
+        .glow-box:hover {
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.3);
+            transform: translateY(-5px);
+            border-color: #512BD4;
+        }
+
+        .blob-shape {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .text-gradient-blue {
+            background: linear-gradient(to right, #22d3ee, #512BD4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Tech Badge */
+        .tech-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            color: #d1d5db;
+            transition: all 0.3s;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+        .tech-badge:hover {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.15);
+            color: white;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0518; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #512BD4; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a855f7; 
+        }
+        
+        /* Floating Animation */
+        .float-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 top-0 start-0 border-b border-gray-800 bg-[#0f0518]/90 backdrop-blur-md">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="#" class="flex items-center space-x-2">
+                <span class="text-2xl font-bold text-white">Amr<span class="text-dotnet">Shawky</span></span>
+            </a>
+            <button id="menu-btn" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-700 focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <!-- Unified Link Styles -->
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-700 rounded-lg bg-cardDark md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent items-center">
+                    <li><a href="#home" class="block py-2 px-3 text-white md:text-white md:p-0 hover:text-dotnet transition">Home</a></li>
+                    <li><a href="#about" class="block py-2 px-3 text-gray-300 md:p-0 hover:text-dotnet transition">About</a></li>
+                    <li><a href="#skills" class="block py-2 px-3 text-gray-300 md:p-0 hover:text-dotnet transition">Stack</a></li>
+                    <li><a href="#projects" class="block py-2 px-3 text-gray-300 md:p-0 hover:text-dotnet transition">Projects</a></li>
+                    <li><a href="#contact" class="block py-2 px-3 text-gray-300 md:p-0 hover:text-dotnet transition">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-dotnet/20 rounded-full blur-[100px]"></div>
+        <div class="absolute bottom-10 right-10 w-80 h-80 bg-secondary/20 rounded-full blur-[100px]"></div>
+
+        <div class="container mx-auto px-6 flex flex-col-reverse md:flex-row items-center">
+            <div class="w-full md:w-1/2 text-center md:text-left mt-10 md:mt-0 z-10">
+                <h2 class="text-xl md:text-2xl font-semibold mb-2 text-gray-300">Hi, I'm <span class="text-white">Amr Mohamed Shawky</span></h2>
+                <h1 class="text-3xl md:text-5xl font-bold mb-6 glow-text leading-tight">
+                    <span class="text-gradient">Full Stack .NET Engineer</span> <br>
+                    <span class="text-gray-400 text-lg md:text-2xl mt-2 block">& Technical Content Creator</span>
+                </h1>
+                
+                <div class="flex flex-wrap gap-3 justify-center md:justify-start mb-6">
+                    <span class="bg-blue-900/30 text-blue-300 text-xs font-bold px-4 py-1.5 rounded-full border border-blue-800 shadow-sm shadow-blue-900/50">Ranked #6 LinkedIn Egypt 🇪🇬</span>
+                    <span class="bg-red-900/30 text-red-300 text-xs font-bold px-4 py-1.5 rounded-full border border-red-800 shadow-sm shadow-red-900/50"><i class="fab fa-youtube mr-1"></i> YouTuber</span>
+                </div>
+
+                <p class="text-gray-400 text-base md:text-lg mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">
+                    Moving beyond code to <strong>engineering scalable solutions</strong>. Specializing in Clean Architecture, CQRS, and Vertical Slices to build robust, high-performance systems.
+                </p>
+                
+            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <!-- Updated CV Link -->
+                    <a href="AmrMohamedCV(FullStack).pdf" download="AmrMohamedCV(FullStack).pdf" class="px-8 py-3 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition shadow-lg">
+                        Download CV <i class="fas fa-download ml-2"></i>
+                    </a>
+                    <a href="#projects" class="px-8 py-3 rounded-full bg-gradient-to-r from-dotnet to-primary text-white font-semibold hover:opacity-90 transition shadow-lg shadow-purple-500/30">
+                        View Projects <i class="fas fa-arrow-down ml-2"></i>
+                    </a>
+                </div>
+                <div class="flex items-center gap-6 justify-center md:justify-start mt-8">
+                    <a href="https://github.com/Amr-shawky" target="_blank" class="text-gray-400 hover:text-white transition text-2xl"><i class="fab fa-github"></i></a>
+                    <a href="https://www.youtube.com/@Eng_Amr" target="_blank" class="text-gray-400 hover:text-red-600 transition text-2xl"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-blue-600 transition text-2xl"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <!-- Hero Image -->
+            <div class="w-full md:w-1/2 flex justify-center z-10 relative">
+                <div class="relative w-72 h-72 md:w-96 md:h-96">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-dotnet to-secondary rounded-full blur-md opacity-50 animate-pulse"></div>
+                    <img src="img3.png" 
+                         alt="Amr Shawky" 
+                         class="relative w-full h-full object-cover border-4 border-gray-800 blob-shape shadow-2xl grayscale hover:grayscale-0 transition duration-500">
+                    
+                    <!-- Floating Icons (Restored) -->
+                    <div class="absolute -top-6 right-0 bg-[#171717] p-3 rounded-full border border-gray-700 float-icon shadow-lg shadow-purple-500/20 z-20">
+                        <i class="fas fa-cube text-3xl text-[#512BD4]"></i> <!-- .NET Icon rep -->
+                    </div>
+                    <div class="absolute bottom-10 -left-6 bg-[#171717] p-3 rounded-full border border-gray-700 float-icon shadow-lg shadow-red-500/20 z-20" style="animation-delay: 1.5s;">
+                        <i class="fab fa-angular text-3xl text-red-600"></i>
+                    </div>
+                    <div class="absolute top-1/2 -right-8 bg-[#171717] p-2 rounded-full border border-gray-700 float-icon shadow-lg shadow-green-500/20 z-20" style="animation-delay: 0.5s;">
+                        <i class="fas fa-database text-2xl text-green-500"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION (Restored) -->
+    <section id="about" class="py-20 bg-black/30">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">About <span class="text-gradient">Me</span></h2>
+            
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <!-- About Image -->
+                <div class="w-full md:w-1/3 flex justify-center">
+                    <div class="relative w-64 h-64 rounded-xl p-1 bg-gradient-to-r from-dotnet to-secondary rotate-3 hover:rotate-0 transition duration-300">
+                        <div class="absolute inset-0 bg-black opacity-20"></div>
+                        <img src="img3.png" 
+                             alt="Profile" 
+                             class="w-full h-full object-cover rounded-xl border-4 border-bgDark relative z-10">
+                    </div>
+                </div>
+                
+                <!-- About Content -->
+                <div class="w-full md:w-2/3">
+                    <h3 class="text-2xl font-bold mb-4 text-white">Full Stack .NET Engineer & Content Creator</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed text-lg">
+                        Hi, I'm <strong>Amr Mohamed Shawky</strong>. I am not just a coder; I am a problem solver who believes in 
+                        <strong>engineering scalable solutions</strong>. My journey involves moving beyond writing code to designing robust architectures like 
+                        <span class="text-dotnet font-semibold">Clean Architecture</span>, 
+                        <span class="text-dotnet font-semibold">CQRS</span>, and 
+                        <span class="text-dotnet font-semibold">Vertical Slices</span>.
+                    </p>
+                    <p class="text-gray-400 mb-8 leading-relaxed text-lg">
+                        I am also passionate about giving back to the community. Ranked <strong>#6 on LinkedIn Egypt</strong>, I share advanced technical tutorials on my 
+                        <a href="https://www.youtube.com/@Eng_Amr" class="text-red-400 hover:underline font-bold">YouTube channel</a> 
+                        to help developers master complex concepts and level up their careers.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-dotnet/10 rounded-lg text-dotnet">
+                                <i class="fas fa-layer-group text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-lg">Architecture</h4>
+                                <p class="text-sm text-gray-500">Designing maintainable systems with DDD & Microservices.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-secondary/10 rounded-lg text-secondary">
+                                <i class="fas fa-chalkboard-teacher text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-lg">Mentorship</h4>
+                                <p class="text-sm text-gray-500">Creating high-quality content for the dev community.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH STACK SECTION -->
+    <section id="skills" class="py-20 relative bg-black/40">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Technical <span class="text-gradient-blue">Skills</span></h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                
+                <!-- 1. Backend & .NET -->
+                <div class="bg-cardDark p-6 rounded-2xl border border-gray-800 hover:border-dotnet transition group hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-lg bg-dotnet/20 flex items-center justify-center mb-4 group-hover:bg-dotnet/40 transition">
+                        <i class="fas fa-server text-dotnet text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-4 text-white">Backend & .NET</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-badge">.NET 8 / Core</span>
+                        <span class="tech-badge">ASP.NET MVC</span>
+                        <span class="tech-badge">Web API</span>
+                        <span class="tech-badge">EF Core</span>
+                        <span class="tech-badge">LINQ</span>
+                        <span class="tech-badge">Hangfire</span>
+                        <span class="tech-badge">SignalR</span>
+                        <span class="tech-badge">ADO.NET</span>
+                    </div>
+                </div>
+
+                <!-- 2. Architecture & DevOps -->
+                <div class="bg-cardDark p-6 rounded-2xl border border-gray-800 hover:border-accent transition group hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center mb-4 group-hover:bg-accent/40 transition">
+                        <i class="fas fa-network-wired text-accent text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-4 text-white">Arch & DevOps</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-badge">Microservices</span>
+                        <span class="tech-badge">Vertical Slice</span>
+                        <span class="tech-badge">CQRS</span>
+                        <span class="tech-badge">Clean Arch</span>
+                        <span class="tech-badge">Docker</span>
+                        <span class="tech-badge">Azure</span>
+                        <span class="tech-badge">CI/CD (GitHub Actions)</span>
+                        <span class="tech-badge">Ocelot</span>
+                    </div>
+                </div>
+
+                <!-- 3. Data & Messaging -->
+                <div class="bg-cardDark p-6 rounded-2xl border border-gray-800 hover:border-success transition group hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-lg bg-success/20 flex items-center justify-center mb-4 group-hover:bg-success/40 transition">
+                        <i class="fas fa-database text-success text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-4 text-white">Data & Messaging</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-badge">SQL Server</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">Redis (Caching)</span>
+                        <span class="tech-badge">MongoDB</span>
+                        <span class="tech-badge">RabbitMQ</span>
+                        <span class="tech-badge">MassTransit</span>
+                    </div>
+                </div>
+
+                <!-- 4. Frontend & Tools -->
+                <div class="bg-cardDark p-6 rounded-2xl border border-gray-800 hover:border-secondary transition group hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-lg bg-secondary/20 flex items-center justify-center mb-4 group-hover:bg-secondary/40 transition">
+                        <i class="fas fa-laptop-code text-secondary text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-4 text-white">Frontend & Tools</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tech-badge">Angular</span>
+                        <span class="tech-badge">TypeScript</span>
+                        <span class="tech-badge">Tailwind CSS</span>
+                        <span class="tech-badge">RxJS</span>
+                        <span class="tech-badge">xUnit / Moq</span>
+                        <span class="tech-badge">Git / Postman</span>
+                        <span class="tech-badge">Agile / Scrum</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED PROJECTS SECTION -->
+    <section id="projects" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Featured <span class="text-gradient">Projects</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- 1. Fitness Microservices -->
+                <div class="glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group">
+                    <div class="h-48 bg-gray-800 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fitness" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute bottom-4 left-4 z-20">
+                            <h3 class="text-xl font-bold text-white">Fitness Microservices</h3>
+                            <span class="text-xs text-gray-300">Scalable Distributed System</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <p class="text-gray-400 text-sm mb-4 flex-1">
+                            Scalable system decoupling logic into Identity, Workout, and Plan services using RabbitMQ for async communication.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-badge border-dotnet text-dotnet">.NET Core</span>
+                            <span class="tech-badge">RabbitMQ</span>
+                            <span class="tech-badge">Ocelot</span>
+                            <span class="tech-badge">CQRS</span>
+                            <span class="tech-badge">Docker</span>
+                        </div>
+                        <a href="https://github.com/Elevate-Team-Project/Fitness_Microservices" target="_blank" class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium">
+                            <i class="fab fa-github mr-2"></i> View Code
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. Online Exam System -->
+                <div class="glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group">
+                    <div class="h-48 bg-gray-800 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Exam" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute bottom-4 left-4 z-20">
+                            <h3 class="text-xl font-bold text-white">Online Exam System</h3>
+                            <span class="text-xs text-gray-300">Advanced Assessment Platform</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <p class="text-gray-400 text-sm mb-4 flex-1">
+                            Backend platform for managing online exams with question banks, scoring, and admin analytics dashboard.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-badge border-dotnet text-dotnet">.NET Web API</span>
+                            <span class="tech-badge">CQRS</span>
+                            <span class="tech-badge">Vertical Slice</span>
+                            <span class="tech-badge">SQL</span>
+                        </div>
+                        <a href="https://github.com/Elevate-Bootcamp/OnlineExam" target="_blank" class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium">
+                            <i class="fab fa-github mr-2"></i> View Code
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3. Educational System API (NEW) -->
+                <div class="glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group">
+                    <div class="h-48 bg-gray-800 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="LMS Backend" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute bottom-4 left-4 z-20">
+                            <h3 class="text-xl font-bold text-white">Educational System API</h3>
+                            <span class="text-xs text-gray-300">Comprehensive LMS Backend</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <p class="text-gray-400 text-sm mb-4 flex-1">
+                            A Backend system for managing courses, enrollments, assessments, progress tracking, payments, and instructor collaboration.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-badge border-dotnet text-dotnet">.NET Core API</span>
+                            <span class="tech-badge">EF Core</span>
+                            <span class="tech-badge">LINQ</span>
+                            <span class="tech-badge">JWT</span>
+                        </div>
+                        <a href="https://github.com/AspAlliance/Educational_System" target="_blank" class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium">
+                            <i class="fab fa-github mr-2"></i> View Code
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 4. Book Store (NEW) -->
+                <div class="glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group">
+                    <div class="h-48 bg-gray-800 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Book Store" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute bottom-4 left-4 z-20">
+                            <h3 class="text-xl font-bold text-white">BStore (Book Store)</h3>
+                            <span class="text-xs text-gray-300">MVC Platform</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <p class="text-gray-400 text-sm mb-4 flex-1">
+                            An easy-to-use platform to buy and manage books. Features cart, wishlist, checkout, and full admin dashboard.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-badge border-dotnet text-dotnet">ASP.NET MVC</span>
+                            <span class="tech-badge">EF Core</span>
+                            <span class="tech-badge">SQL Server</span>
+                            <span class="tech-badge">Bootstrap</span>
+                        </div>
+                        <a href="https://github.com/Amr-shawky/BStore" target="_blank" class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium">
+                            <i class="fab fa-github mr-2"></i> View Code
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 5. FreshCart -->
+                <div class="glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group">
+                    <div class="h-48 bg-gray-800 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ecommerce" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute bottom-4 left-4 z-20">
+                            <h3 class="text-xl font-bold text-white">FreshCart</h3>
+                            <span class="text-xs text-gray-300">E-Commerce Web App</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <p class="text-gray-400 text-sm mb-4 flex-1">
+                            E-commerce app for browsing products and managing orders. Includes secure checkout and responsive UI with smooth animations.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-badge border-red-500 text-red-400">Angular</span>
+                            <span class="tech-badge">TypeScript</span>
+                            <span class="tech-badge">Tailwind CSS</span>
+                        </div>
+                        <a href="https://github.com/Amr-shawky/e-commerce" target="_blank" class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium">
+                            <i class="fab fa-github mr-2"></i> View Code
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 6. Event Management System -->
+                <div class="glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group">
+                    <div class="h-48 bg-gray-800 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Events" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute bottom-4 left-4 z-20">
+                            <h3 class="text-xl font-bold text-white">Event System</h3>
+                            <span class="text-xs text-gray-300">Management Platform</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <p class="text-gray-400 text-sm mb-4 flex-1">
+                            Platform for event organization, role-based access, ticket booking with QR check-in, and admin moderation.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-badge border-dotnet text-dotnet">.NET Core API</span>
+                            <span class="tech-badge">EF Core</span>
+                            <span class="tech-badge">SQL</span>
+                            <span class="tech-badge">JWT</span>
+                        </div>
+                        <a href="https://github.com/EGDevNinjas/EventManagementSystem" target="_blank" class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium">
+                            <i class="fab fa-github mr-2"></i> View Code
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 7. Novira (Updated) -->
+                <div class="glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group">
+                    <div class="h-48 bg-gray-800 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Novira" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute bottom-4 left-4 z-20">
+                            <h3 class="text-xl font-bold text-white">Novira</h3>
+                            <span class="text-xs text-gray-300">E-learning UI</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <p class="text-gray-400 text-sm mb-4 flex-1">
+                            A modern E-learning platform frontend for students to browse and enroll in courses with an interactive UI.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-badge border-red-500 text-red-400">Angular</span>
+                            <span class="tech-badge">Material</span>
+                            <span class="tech-badge">Bootstrap</span>
+                        </div>
+                        <a href="https://github.com/Amr-shawky/Novira" target="_blank" class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium">
+                            <i class="fab fa-github mr-2"></i> View Code
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Mini Projects -->
+            <div class="mt-20 border-t border-gray-800 pt-10">
+                <h3 class="text-2xl font-bold mb-8 text-center text-gray-300">Frontend <span class="text-primary">Creative Collection</span></h3>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://github.com/Amr-shawky/GameGate" class="px-5 py-2 border border-gray-700 rounded-full hover:bg-cardDark text-sm text-gray-300 transition hover:border-primary hover:text-white">🎮 GameGate</a>
+                    <a href="https://github.com/Amr-shawky/RegexCraft" class="px-5 py-2 border border-gray-700 rounded-full hover:bg-cardDark text-sm text-gray-300 transition hover:border-primary hover:text-white">🔍 RegexCraft</a>
+                    <a href="https://github.com/Amr-shawky/Bookmarker" class="px-5 py-2 border border-gray-700 rounded-full hover:bg-cardDark text-sm text-gray-300 transition hover:border-primary hover:text-white">🔖 Bookmarker</a>
+                    <a href="https://github.com/Amr-shawky/Mealify" class="px-5 py-2 border border-gray-700 rounded-full hover:bg-cardDark text-sm text-gray-300 transition hover:border-primary hover:text-white">🍽️ Mealify</a>
+                    <a href="https://github.com/Amr-shawky/WeatherCore" class="px-5 py-2 border border-gray-700 rounded-full hover:bg-cardDark text-sm text-gray-300 transition hover:border-primary hover:text-white">☁️ WeatherCore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-20 bg-black/40">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <h2 class="text-4xl font-bold text-center mb-12">Get In <span class="text-gradient">Touch</span></h2>
+            
+            <div class="bg-cardDark p-8 rounded-2xl border border-gray-800 shadow-2xl glow-box">
+                <form onsubmit="event.preventDefault(); alert('Thanks for reaching out! (This is a demo)');">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-300">Name</label>
+                            <input type="text" id="name" class="w-full p-4 bg-gray-900 border border-gray-700 rounded-lg focus:ring-dotnet focus:border-dotnet text-white outline-none transition" placeholder="Your Name" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-300">Email</label>
+                            <input type="email" id="email" class="w-full p-4 bg-gray-900 border border-gray-700 rounded-lg focus:ring-dotnet focus:border-dotnet text-white outline-none transition" placeholder="name@example.com" required>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block mb-2 text-sm font-medium text-gray-300">Message</label>
+                        <textarea id="message" rows="4" class="w-full p-4 bg-gray-900 border border-gray-700 rounded-lg focus:ring-dotnet focus:border-dotnet text-white outline-none transition" placeholder="Let's build something scalable..." required></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-dotnet to-secondary text-white font-bold hover:opacity-90 transition transform hover:scale-[1.02]">
+                        Send Message <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div class="flex justify-center gap-8 mt-12">
+                <a href="https://github.com/Amr-shawky" target="_blank" class="text-gray-400 hover:text-white transition text-3xl"><i class="fab fa-github"></i></a>
+                <a href="#" class="text-gray-400 hover:text-blue-600 transition text-3xl"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.youtube.com/@Eng_Amr" target="_blank" class="text-gray-400 hover:text-red-500 transition text-3xl"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-8 border-t border-gray-900">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-500 text-sm">
+                Designed & Built by <span class="text-dotnet font-semibold">Amr Shawky</span>. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const navbar = document.getElementById('navbar-default');
+
+        menuBtn.addEventListener('click', () => {
+            navbar.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (!navbar.classList.contains('hidden')) {
+                    navbar.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
