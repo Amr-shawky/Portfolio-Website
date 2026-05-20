@@ -458,7 +458,10 @@
     <!-- ==================== FEATURED PROJECTS SECTION ==================== -->
     <section id="projects" class="py-20 relative section-reveal">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 section-title">Featured <span class="text-gradient">Projects</span></h2>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4 section-title">Featured <span class="text-gradient">Projects</span></h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">A selection of my recent work showcasing Full Stack development, Microservices Architecture, and Cloud Solutions</p>
+            </div>
             
             <!-- Filter Tabs -->
             <div class="flex flex-wrap justify-center gap-3 mb-12 reveal-up">
@@ -466,12 +469,13 @@
                 <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition" data-filter="backend">Backend</button>
                 <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition" data-filter="frontend">Frontend</button>
                 <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition" data-filter="microservices">Microservices</button>
+                <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition" data-filter="fullstack">Full Stack</button>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
                 
                 <!-- 1. Flower E-Commerce -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card" data-category="microservices">
+                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="microservices" data-project="flower">
                     <div class="h-48 bg-gray-800 relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
                         <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Flower E-Commerce" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
@@ -490,14 +494,14 @@
                             <span class="tech-badge">Redis</span>
                             <span class="tech-badge">Stripe</span>
                         </div>
-                        <a href="https://github.com/Elevate-Team-Project/Flower_ECommerce_Microservices" target="_blank" class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic">
-                            <i class="fab fa-github mr-2"></i> View Code
-                        </a>
+                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
+                            <i class="fas fa-info-circle mr-1"></i> View Details
+                        </button>
                     </div>
                 </div>
 
                 <!-- 2. Fitness Microservices -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card" data-category="microservices">
+                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="microservices" data-project="fitness">
                     <div class="h-48 bg-gray-800 relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
                         <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fitness" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
@@ -515,14 +519,14 @@
                             <span class="tech-badge">CQRS</span>
                             <span class="tech-badge">Docker</span>
                         </div>
-                        <a href="https://github.com/Elevate-Team-Project/Fitness_Microservices" target="_blank" class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic">
-                            <i class="fab fa-github mr-2"></i> View Code
-                        </a>
+                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
+                            <i class="fas fa-info-circle mr-1"></i> View Details
+                        </button>
                     </div>
                 </div>
 
                 <!-- 3. Online Exam System -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card" data-category="backend">
+                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="backend" data-project="exam">
                     <div class="h-48 bg-gray-800 relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
                         <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Exam" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
@@ -539,14 +543,14 @@
                             <span class="tech-badge">Vertical Slice</span>
                             <span class="tech-badge">SQL</span>
                         </div>
-                        <a href="https://github.com/Elevate-Bootcamp/OnlineExam" target="_blank" class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic">
-                            <i class="fab fa-github mr-2"></i> View Code
-                        </a>
+                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
+                            <i class="fas fa-info-circle mr-1"></i> View Details
+                        </button>
                     </div>
                 </div>
 
                 <!-- 4. Educational System API -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card" data-category="backend">
+                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="backend" data-project="lms">
                     <div class="h-48 bg-gray-800 relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
                         <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="LMS" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
@@ -563,14 +567,14 @@
                             <span class="tech-badge">LINQ</span>
                             <span class="tech-badge">JWT</span>
                         </div>
-                        <a href="https://github.com/AspAlliance/Educational_System" target="_blank" class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic">
-                            <i class="fab fa-github mr-2"></i> View Code
-                        </a>
+                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
+                            <i class="fas fa-info-circle mr-1"></i> View Details
+                        </button>
                     </div>
                 </div>
 
                 <!-- 5. Book Store -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card" data-category="backend">
+                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="backend" data-project="bstore">
                     <div class="h-48 bg-gray-800 relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
                         <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Book Store" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
@@ -587,14 +591,14 @@
                             <span class="tech-badge">SQL Server</span>
                             <span class="tech-badge">Bootstrap</span>
                         </div>
-                        <a href="https://github.com/Amr-shawky/BStore" target="_blank" class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic">
-                            <i class="fab fa-github mr-2"></i> View Code
-                        </a>
+                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
+                            <i class="fas fa-info-circle mr-1"></i> View Details
+                        </button>
                     </div>
                 </div>
 
                 <!-- 6. FreshCart -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card" data-category="frontend">
+                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="frontend" data-project="freshcart">
                     <div class="h-48 bg-gray-800 relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
                         <img src="https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ecommerce" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
@@ -610,14 +614,14 @@
                             <span class="tech-badge">TypeScript</span>
                             <span class="tech-badge">Tailwind CSS</span>
                         </div>
-                        <a href="https://github.com/Amr-shawky/e-commerce" target="_blank" class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic">
-                            <i class="fab fa-github mr-2"></i> View Code
-                        </a>
+                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
+                            <i class="fas fa-info-circle mr-1"></i> View Details
+                        </button>
                     </div>
                 </div>
 
                 <!-- 7. Event Management System -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card" data-category="backend">
+                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="backend" data-project="events">
                     <div class="h-48 bg-gray-800 relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
                         <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Events" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
@@ -634,14 +638,14 @@
                             <span class="tech-badge">SQL</span>
                             <span class="tech-badge">JWT</span>
                         </div>
-                        <a href="https://github.com/EGDevNinjas/EventManagementSystem" target="_blank" class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic">
-                            <i class="fab fa-github mr-2"></i> View Code
-                        </a>
+                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
+                            <i class="fas fa-info-circle mr-1"></i> View Details
+                        </button>
                     </div>
                 </div>
 
                 <!-- 8. Novira -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card" data-category="frontend">
+                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="frontend" data-project="novira">
                     <div class="h-48 bg-gray-800 relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
                         <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Novira" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
@@ -657,9 +661,38 @@
                             <span class="tech-badge">Material</span>
                             <span class="tech-badge">Bootstrap</span>
                         </div>
-                        <a href="https://github.com/Amr-shawky/Novira" target="_blank" class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic">
-                            <i class="fab fa-github mr-2"></i> View Code
-                        </a>
+                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
+                            <i class="fas fa-info-circle mr-1"></i> View Details
+                        </button>
+                    </div>
+                </div>
+                <!-- 9. ELEVATE BOOTCAMP - SPECIAL FULL STACK PROJECT -->
+                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border-2 border-dotnet/30 flex flex-col h-full group tilt-card cursor-pointer hover:border-dotnet transition-all" data-category="fullstack" data-project="elevate">
+                    <div class="h-48 bg-gradient-to-br from-dotnet/20 to-secondary/10 relative overflow-hidden flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                        <div class="text-center z-20">
+                            <div class="text-5xl mb-2">🚀</div>
+                            <h3 class="text-xl font-bold text-white">Elevate Bootcamp Portal</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <p class="text-gray-400 text-sm mb-4 flex-1">Full-stack training portal for Elevate Tech Company. Manages curriculum, student progress, assignments, live sessions, and mentoring with real-time notifications and analytics.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tech-badge border-dotnet text-dotnet">.NET 8</span>
+                            <span class="tech-badge border-accent text-accent">Angular 18</span>
+                            <span class="tech-badge">Azure</span>
+                            <span class="tech-badge">PostgreSQL</span>
+                            <span class="tech-badge">Redis</span>
+                            <span class="tech-badge">SignalR</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="flex-1 py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
+                                <i class="fas fa-info-circle mr-1"></i> Details
+                            </button>
+                            <a href="https://portal.elevateegy.com/home" target="_blank" class="flex-1 py-2 text-center rounded-lg bg-gradient-to-r from-dotnet to-secondary text-white border border-dotnet/50 hover:opacity-90 transition text-sm font-bold btn-enhanced magnetic">
+                                <i class="fas fa-globe mr-1"></i> Visit
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -839,5 +872,198 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <!-- ==================== PROJECT DETAILS MODAL ==================== -->
+    <div id="projectModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9999] hidden flex items-center justify-center p-2">
+        <div class="bg-cardDark border border-gray-700 rounded-2xl max-w-7xl w-full max-h-[95vh] overflow-y-auto animate-fade-in shadow-2xl relative">
+            <!-- Close Button -->
+            <button onclick="closeProjectModal()" class="fixed top-10 right-10 z-[10000] text-gray-400 hover:text-white transition text-2xl bg-black/50 rounded-full p-2 w-10 h-10 flex items-center justify-center">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <!-- Modal Content -->
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Projects Data (Hidden) -->
+    <script>
+        const projectsData = {
+            flower: {
+                title: '🌸 Flower E-Commerce',
+                subtitle: 'Enterprise Microservices Platform',
+                description: 'A full-featured flower & gift shop built with enterprise-grade microservices architecture. This system handles everything from product catalog management to order processing and payment integration.',
+                image: 'https://images.unsplash.com/photo-1487530811176-3780de880c2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                technologies: ['.NET Core', 'RabbitMQ', 'gRPC', 'Docker', 'Redis', 'Stripe', 'SQL Server', 'Ocelot'],
+                features: [
+                    'Multiple Microservices (Auth, Catalog, Cart, Order, Payment, Delivery, Notification, Audit)',
+                    'Real-time Message Queue with RabbitMQ',
+                    'gRPC for Inter-service Communication',
+                    'Stripe Payment Integration',
+                    'Redis Caching Layer',
+                    'Docker Containerization',
+                    'API Gateway with Ocelot',
+                    'Event-Driven Architecture'
+                ],
+                details: 'This project demonstrates advanced microservices architecture with 10 independent services, each responsible for a specific business domain. The system uses RabbitMQ for asynchronous communication between services, ensuring scalability and reliability. Payment processing is handled through Stripe integration, and Redis provides high-performance caching for frequently accessed data.',
+                github: 'https://github.com/Elevate-Team-Project/Flower_ECommerce_Microservices'
+            },
+            fitness: {
+                title: 'Fitness Microservices',
+                subtitle: 'Scalable Distributed System',
+                description: 'A scalable fitness platform that decouples business logic into independent services using modern microservices patterns and asynchronous communication.',
+                image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                technologies: ['.NET Core', 'RabbitMQ', 'Ocelot', 'CQRS', 'Docker', 'PostgreSQL', 'LINQ'],
+                features: [
+                    'Microservices: Identity, Workout, Plan',
+                    'RabbitMQ for Async Communication',
+                    'Ocelot API Gateway',
+                    'CQRS Pattern Implementation',
+                    'Docker Containerization',
+                    'PostgreSQL Database',
+                    'Event Sourcing'
+                ],
+                details: 'This platform demonstrates the separation of concerns principle by breaking down fitness management into specialized microservices. The Identity service handles user management, the Workout service manages exercise routines, and the Plan service handles fitness plans. RabbitMQ enables seamless asynchronous communication between services.',
+                github: 'https://github.com/Elevate-Team-Project/Fitness_Microservices'
+            },
+            exam: {
+                title: 'Online Exam System',
+                subtitle: 'Advanced Assessment Platform',
+                description: 'A comprehensive backend platform for managing online exams with question banks, scoring algorithms, and admin analytics dashboard.',
+                image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                technologies: ['.NET Web API', 'CQRS', 'Vertical Slice', 'SQL Server', 'EF Core', 'LINQ'],
+                features: [
+                    'Question Bank Management',
+                    'Exam Scheduling & Execution',
+                    'Automated Scoring Algorithms',
+                    'Admin Analytics Dashboard',
+                    'CQRS Pattern',
+                    'Vertical Slice Architecture',
+                    'Real-time Progress Tracking',
+                    'Comprehensive Reporting'
+                ],
+                details: 'Built using Clean Architecture principles with Vertical Slice pattern and CQRS pattern. Each exam workflow is organized vertically, containing all layers needed for that specific feature. This approach improves maintainability and scalability.',
+                github: 'https://github.com/Elevate-Bootcamp/OnlineExam'
+            },
+            lms: {
+                title: 'Educational System API',
+                subtitle: 'Comprehensive LMS Backend',
+                description: 'A backend system for managing courses, enrollments, assessments, progress tracking, payments, and instructor collaboration.',
+                image: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                technologies: ['.NET Core API', 'EF Core', 'LINQ', 'JWT', 'SQL Server', 'Repository Pattern'],
+                features: [
+                    'Course & Curriculum Management',
+                    'Student Enrollment System',
+                    'Assessment & Quiz Engine',
+                    'Progress Tracking & Analytics',
+                    'Payment Integration',
+                    'Instructor Dashboard',
+                    'Certificate Generation',
+                    'Attendance Tracking'
+                ],
+                details: 'A robust LMS backend built with .NET Core that supports the complete learning management lifecycle. It features comprehensive course management, student progress tracking, assessment tools, and payment processing capabilities.',
+                github: 'https://github.com/AspAlliance/Educational_System'
+            },
+            bstore: {
+                title: 'BStore (Book Store)',
+                subtitle: 'MVC Platform',
+                description: 'An easy-to-use platform to buy and manage books with shopping cart, wishlist, checkout, and full admin dashboard.',
+                image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                technologies: ['ASP.NET MVC', 'EF Core', 'SQL Server', 'Bootstrap', 'LINQ'],
+                features: [
+                    'Product Catalog with Search & Filter',
+                    'Shopping Cart Management',
+                    'Wishlist Functionality',
+                    'Secure Checkout Process',
+                    'User Profiles & Order History',
+                    'Admin Dashboard',
+                    'Inventory Management',
+                    'User Reviews & Ratings'
+                ],
+                details: 'A full-featured e-commerce platform built with ASP.NET MVC showcasing traditional web application development. Features a comprehensive admin panel for managing inventory, orders, and users.',
+                github: 'https://github.com/Amr-shawky/BStore'
+            },
+            freshcart: {
+                title: 'FreshCart',
+                subtitle: 'E-Commerce Web App',
+                description: 'E-commerce app for browsing products and managing orders with secure checkout and responsive UI with smooth animations.',
+                image: 'https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                technologies: ['Angular', 'TypeScript', 'Tailwind CSS', 'RxJS', 'Responsive Design'],
+                features: [
+                    'Modern Product Catalog',
+                    'Advanced Search & Filtering',
+                    'Real-time Cart Updates',
+                    'Secure Payment Gateway',
+                    'Order Tracking',
+                    'User Wishlist',
+                    'Responsive Mobile Design',
+                    'Smooth Animations'
+                ],
+                details: 'A modern e-commerce frontend built with Angular 18 and TypeScript. Features real-time cart management, advanced filtering, and a beautiful responsive UI with Tailwind CSS styling.',
+                github: 'https://github.com/Amr-shawky/e-commerce'
+            },
+            events: {
+                title: 'Event Management System',
+                subtitle: 'Management Platform',
+                description: 'Platform for event organization with role-based access, ticket booking with QR check-in, and admin moderation.',
+                image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                technologies: ['.NET Core API', 'EF Core', 'SQL Server', 'JWT', 'QR Code Generation'],
+                features: [
+                    'Event Creation & Management',
+                    'Role-Based Access Control',
+                    'Ticket Booking System',
+                    'QR Code Check-in',
+                    'Admin Moderation Panel',
+                    'Attendee Tracking',
+                    'Real-time Notifications',
+                    'Event Analytics'
+                ],
+                details: 'A comprehensive event management system with role-based access control, ticket booking capabilities, and QR code-based check-in functionality. Includes an admin panel for moderation and analytics.',
+                github: 'https://github.com/EGDevNinjas/EventManagementSystem'
+            },
+            novira: {
+                title: 'Novira',
+                subtitle: 'E-learning UI',
+                description: 'A modern E-learning platform frontend for students to browse and enroll in courses with an interactive UI.',
+                image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                technologies: ['Angular', 'Material Design', 'Bootstrap', 'TypeScript', 'Responsive'],
+                features: [
+                    'Course Catalog Browse',
+                    'Course Search & Filter',
+                    'Student Enrollment',
+                    'Course Details View',
+                    'Instructor Profiles',
+                    'Course Reviews & Ratings',
+                    'Responsive Design',
+                    'Material Design UI'
+                ],
+                details: 'A beautiful e-learning platform frontend built with Angular using Material Design components. Features an intuitive course catalog, search functionality, and responsive design for all devices.',
+                github: 'https://github.com/Amr-shawky/Novira'
+            },
+            elevate: {
+                title: '🚀 Elevate Bootcamp Portal',
+                subtitle: 'Full Stack Training Platform',
+                description: 'A comprehensive full-stack training portal developed for Elevate Tech Company. Production-deployed system managing bootcamp curriculum, student progress, assignments, live sessions, and mentoring.',
+                image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                technologies: ['.NET 8 API', 'Angular 18', 'Azure Cloud', 'PostgreSQL', 'Redis', 'SignalR', 'Docker', 'CI/CD'],
+                features: [
+                    'Student & Instructor Dashboard with Real-time Analytics',
+                    'Live Class Scheduling & Real-time Communication',
+                    'Assignment Management & Automated Grading',
+                    'Certificate Generation & Verification',
+                    'Progress Tracking & Performance Reports',
+                    'Payment Integration & Billing System',
+                    'Video Streaming Integration',
+                    'Real-time Notifications with SignalR',
+                    'Advanced Search & Filtering',
+                    'Comprehensive Admin Controls'
+                ],
+                details: 'My flagship full-stack project deployed in production for Elevate Tech Company. This system serves real students and instructors, featuring real-time communication with SignalR, advanced analytics, automated grading systems, and certificate generation. Built with .NET 8 for a robust backend and Angular 18 for a modern frontend, deployed on Azure with PostgreSQL and Redis for optimal performance.',
+                github: 'https://portal.elevateegy.com/home',
+                isLive: true
+            }
+        };
+    </script>
+
 </body>
 </html>

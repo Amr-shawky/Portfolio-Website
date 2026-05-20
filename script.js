@@ -785,3 +785,191 @@ function hideToast() {
 
 // Make hideToast globally accessible for onclick
 window.hideToast = hideToast;
+// ============================================
+// ELEVATE PROJECT CARD ENHANCEMENT
+// ============================================
+function initElevateProjectCard() {
+    const elevateCard = document.querySelector('[data-category="fullstack"]');
+    if (!elevateCard) return;
+    
+    // Add special hover effects
+    elevateCard.addEventListener('mousemove', (e) => {
+        const rect = elevateCard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+        
+        elevateCard.style.transform = 'perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px) scale(1.02)';
+    });
+    
+    elevateCard.addEventListener('mouseleave', () => {
+        elevateCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)';
+    });
+    
+    // Add glow effect on scroll into view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                elevateCard.classList.add('float-glow');
+                elevateCard.style.borderColor = 'rgba(81, 43, 212, 0.8)';
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    observer.observe(elevateCard);
+}
+
+// ============================================
+// ENHANCED PROJECT CARD INTERACTIONS
+// ============================================
+function enhanceProjectCards() {
+    const cards = document.querySelectorAll('.project-item');
+    
+    cards.forEach((card, index) => {
+        // Add staggered animation
+        card.style.animationDelay = (index * 0.1) + 's';
+        
+        // Add interactive glow on hover
+        card.addEventListener('mouseenter', function() {
+            this.style.filter = 'drop-shadow(0 0 30px rgba(168, 85, 247, 0.5))';
+            const title = this.querySelector('h3');
+            if (title) title.style.color = '#a855f7';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.filter = 'drop-shadow(0 0 15px rgba(81, 43, 212, 0.1))';
+            const title = this.querySelector('h3');
+            if (title) title.style.color = '#ffffff';
+        });
+    });
+}
+
+// Call the new functions
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        initElevateProjectCard();
+        enhanceProjectCards();
+        initProjectModals();
+    }, 500);
+});
+
+// ============================================
+// PROJECT MODAL FUNCTIONS
+// ============================================
+function openProjectModal(projectId) {
+    const project = projectsData[projectId];
+    if (!project) return;
+    
+    const modalContent = document.getElementById('modalContent');
+    const isLive = project.isLive || false;
+    const buttonText = isLive ? 'Visit Live Portal' : 'View Code';
+    const buttonClass = isLive ? 'bg-gradient-to-r from-dotnet to-secondary' : 'bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet';
+    
+    const techHTML = project.technologies.map(tech => `
+        <div class="bg-dotnet/10 border border-dotnet/30 rounded-lg p-3 text-center">
+            <span class="text-dotnet font-semibold">${tech}</span>
+        </div>
+    `).join('');
+    
+    const featuresHTML = project.features.map(feature => `
+        <li class="flex gap-3 items-start">
+            <span class="text-dotnet mt-1"><i class="fas fa-check"></i></span>
+            <span class="text-gray-300">${feature}</span>
+        </li>
+    `).join('');
+    
+    modalContent.innerHTML = `
+        <div class="overflow-hidden">
+            <div class="h-64 md:h-80 overflow-hidden relative">
+                <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-cardDark via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">${project.title}</h1>
+                    <p class="text-gray-300 text-lg">${project.subtitle}</p>
+                </div>
+            </div>
+            
+            <div class="p-8 md:p-12">
+                <div class="mb-8">
+                    <p class="text-gray-300 text-lg leading-relaxed mb-6">${project.description}</p>
+                    <p class="text-gray-400 leading-relaxed">${project.details}</p>
+                </div>
+                
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fas fa-microchip text-dotnet"></i> Technology Stack
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        ${techHTML}
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fas fa-star text-secondary"></i> Key Features
+                    </h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${featuresHTML}
+                    </ul>
+                </div>
+                
+                <div class="flex gap-4">
+                    <a href="${project.github}" target="_blank" class="flex-1 py-3 text-center rounded-lg ${buttonClass} text-white font-bold btn-enhanced magnetic transition">
+                        <i class="${isLive ? 'fas fa-globe' : 'fab fa-github'} mr-2"></i> ${buttonText}
+                    </a>
+                    <button onclick="closeProjectModal()" class="px-6 py-3 rounded-lg bg-gray-800 border border-gray-600 text-white hover:border-primary hover:text-primary transition font-semibold btn-enhanced magnetic">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('projectModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    
+    // Scroll to top of modal
+    setTimeout(() => {
+        const modal = document.getElementById('projectModal');
+        if (modal) {
+            modal.scrollTop = 0;
+        }
+    }, 50);
+}
+
+function closeProjectModal() {
+    document.getElementById('projectModal').classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+function initProjectModals() {
+    const projectCards = document.querySelectorAll('[data-project]');
+    projectCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('.view-details')) {
+                const projectId = card.getAttribute('data-project');
+                openProjectModal(projectId);
+            }
+        });
+    });
+    
+    const modal = document.getElementById('projectModal');
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target.id === 'projectModal') {
+                closeProjectModal();
+            }
+        });
+    }
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeProjectModal();
+        }
+    });
+}
