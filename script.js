@@ -30,7 +30,7 @@ function initAllAnimations() {
     initMobileMenu();
     initScrollProgress();
     initNavbar();
-    initThemeToggle();
+    enforceDarkMode();
     initTypingEffect();
     initScrollAnimations();
     initTimelineAnimation();
@@ -39,7 +39,6 @@ function initAllAnimations() {
     initSmoothScroll();
     initParallax();
     initProjectFilter();
-    initTestimonialCarousel();
     initContactForm();
 }
 
@@ -279,24 +278,13 @@ function initNavbar() {
 }
 
 // ============================================
-// THEME TOGGLE
+// PERMANENT DARK MODE
 // ============================================
-function initThemeToggle() {
-    var toggle = document.getElementById('themeToggle');
-    var icon = document.getElementById('themeIcon');
-    if (!toggle || !icon) return;
-
-    var savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    icon.className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
-
-    toggle.addEventListener('click', function() {
-        var current = document.documentElement.getAttribute('data-theme');
-        var next = current === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('portfolio-theme', next);
-        icon.className = next === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
-    });
+function enforceDarkMode() {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    try {
+        localStorage.setItem('portfolio-theme', 'dark');
+    } catch (e) {}
 }
 
 // ============================================
@@ -304,11 +292,11 @@ function initThemeToggle() {
 // ============================================
 function initTypingEffect() {
     var texts = [
-        'Building scalable .NET solutions...',
-        'Clean Architecture enthusiast...',
-        'Microservices & CQRS expert...',
-        'Technical Content Creator...',
-        'Mentoring developers...'
+        'Full Stack .NET Engineer & Architect...',
+        'Clean Architecture & CQRS Specialist...',
+        'Microservices & Distributed Systems...',
+        'Ranked #6 Tech Creator in Egypt 🇪🇬...',
+        'Backend Mentor at Elevate Tech...'
     ];
 
     var typingText = document.getElementById('typingText');
@@ -559,8 +547,9 @@ function initProjectFilter() {
             this.classList.add('active');
 
             projectItems.forEach(function(item) {
-                var category = item.getAttribute('data-category');
-                if (filter === 'all' || category === filter) {
+                var category = item.getAttribute('data-category') || '';
+                var categories = category.split(' ');
+                if (filter === 'all' || categories.indexOf(filter) !== -1) {
                     item.classList.remove('hidden-project');
                     item.style.opacity = '0';
                     item.style.transform = 'scale(0.8)';
@@ -578,90 +567,6 @@ function initProjectFilter() {
             });
         });
     });
-}
-
-// ============================================
-// TESTIMONIAL CAROUSEL
-// ============================================
-function initTestimonialCarousel() {
-    var track = document.getElementById('testimonialTrack');
-    var dots = document.querySelectorAll('.testimonial-dot');
-    var prevBtn = document.getElementById('prevTestimonial');
-    var nextBtn = document.getElementById('nextTestimonial');
-    if (!track) return;
-
-    var currentSlide = 0;
-    var totalSlides = document.querySelectorAll('.testimonial-slide').length;
-    var autoPlayInterval;
-
-    function goToSlide(index) {
-        if (index < 0) index = totalSlides - 1;
-        if (index >= totalSlides) index = 0;
-        currentSlide = index;
-        track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
-        dots.forEach(function(dot) { dot.classList.remove('active'); });
-        if (dots[currentSlide]) dots[currentSlide].classList.add('active');
-    }
-
-    function startAutoPlay() {
-        autoPlayInterval = setInterval(function() {
-            goToSlide(currentSlide + 1);
-        }, 5000);
-    }
-
-    function stopAutoPlay() {
-        clearInterval(autoPlayInterval);
-    }
-
-    if (prevBtn) {
-        prevBtn.addEventListener('click', function() {
-            stopAutoPlay();
-            goToSlide(currentSlide - 1);
-            startAutoPlay();
-        });
-    }
-
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function() {
-            stopAutoPlay();
-            goToSlide(currentSlide + 1);
-            startAutoPlay();
-        });
-    }
-
-    dots.forEach(function(dot) {
-        dot.addEventListener('click', function() {
-            stopAutoPlay();
-            goToSlide(parseInt(this.getAttribute('data-index')));
-            startAutoPlay();
-        });
-    });
-
-    // Touch/swipe support
-    var startX = 0;
-    var endX = 0;
-    var carousel = document.getElementById('testimonialCarousel');
-    if (carousel) {
-        carousel.addEventListener('touchstart', function(e) {
-            startX = e.touches[0].clientX;
-        }, { passive: true });
-
-        carousel.addEventListener('touchend', function(e) {
-            endX = e.changedTouches[0].clientX;
-            var diff = startX - endX;
-            if (Math.abs(diff) > 50) {
-                stopAutoPlay();
-                if (diff > 0) {
-                    goToSlide(currentSlide + 1);
-                } else {
-                    goToSlide(currentSlide - 1);
-                }
-                startAutoPlay();
-            }
-        }, { passive: true });
-    }
-
-    startAutoPlay();
 }
 
 // ============================================
@@ -789,7 +694,7 @@ window.hideToast = hideToast;
 // ELEVATE PROJECT CARD ENHANCEMENT
 // ============================================
 function initElevateProjectCard() {
-    const elevateCard = document.querySelector('[data-category="fullstack"]');
+    const elevateCard = document.querySelector('[data-project="elevate"]');
     if (!elevateCard) return;
     
     // Add special hover effects
@@ -804,7 +709,7 @@ function initElevateProjectCard() {
         const rotateX = (y - centerY) / 10;
         const rotateY = (centerX - x) / 10;
         
-        elevateCard.style.transform = 'perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px) scale(1.02)';
+        elevateCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px) scale(1.02)`;
     });
     
     elevateCard.addEventListener('mouseleave', () => {

@@ -2,122 +2,18 @@
    CSS VARIABLES & THEME
    ============================================ */
 :root {
-    --primary-purple: #a855f7;
-    --primary-pink: #ec4899;
+    --primary-purple: #6366f1;
+    --primary-pink: #ff334b;
     --dotnet-purple: #512BD4;
-    --dark-bg: #0f0518;
-    --dark-card: #1a1025;
+    --dark-bg: #090d16;
+    --dark-card: #111726;
     --text-primary: #ffffff;
-    --text-secondary: #a1a1aa;
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --gradient-primary: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
-    --gradient-dotnet: linear-gradient(135deg, var(--dotnet-purple), var(--primary-purple));
-    --gradient-animated: linear-gradient(270deg, var(--primary-purple), var(--primary-pink), #6366f1, var(--dotnet-purple));
-}
-
-/* Light Theme */
-[data-theme="light"] {
-    --dark-bg: #f5f5f7;
-    --dark-card: #ffffff;
-    --text-primary: #1a1a2e;
-    --text-secondary: #6b7280;
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="light"] body {
-    background-color: var(--dark-bg);
-    color: var(--text-primary);
-}
-
-[data-theme="light"] .gradient-bg-animated {
-    background: var(--dark-bg);
-}
-
-[data-theme="light"] .gradient-bg-animated::before {
-    background: radial-gradient(circle at 20% 80%, rgba(81, 43, 212, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.08) 0%, transparent 50%);
-}
-
-[data-theme="light"] #navbar {
-    background: rgba(245, 245, 247, 0.9) !important;
-    border-color: rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="light"] .nav-link,
-[data-theme="light"] nav a span {
-    color: var(--text-primary) !important;
-}
-
-[data-theme="light"] .text-white,
-[data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3, [data-theme="light"] h4 {
-    color: var(--text-primary);
-}
-
-[data-theme="light"] .text-gray-300,
-[data-theme="light"] .text-gray-400,
-[data-theme="light"] .text-gray-500 {
-    color: var(--text-secondary) !important;
-}
-
-[data-theme="light"] .bg-cardDark,
-[data-theme="light"] .glass-card {
-    background: var(--dark-card) !important;
-    border-color: rgba(0, 0, 0, 0.1) !important;
-}
-
-[data-theme="light"] .tech-badge {
-    background: rgba(0, 0, 0, 0.05);
-    border-color: rgba(0, 0, 0, 0.15);
-    color: #374151;
-}
-
-[data-theme="light"] .neumorphic {
-    background: var(--dark-card);
-    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.08), -8px -8px 16px rgba(255, 255, 255, 0.8);
-}
-
-[data-theme="light"] .particle-canvas {
-    opacity: 0.3;
-}
-
-[data-theme="light"] .noise-overlay {
-    opacity: 0.01;
-}
-
-[data-theme="light"] .floating-input {
-    background: #f9fafb !important;
-    border-color: #d1d5db !important;
-    color: #1a1a2e !important;
-}
-
-[data-theme="light"] .filter-btn {
-    background: rgba(0, 0, 0, 0.05);
-    color: #374151;
-    border-color: rgba(0, 0, 0, 0.15);
-}
-
-[data-theme="light"] .filter-btn.active {
-    background: var(--dotnet-purple);
-    color: white;
-}
-
-[data-theme="light"] .glow-box:hover {
-    box-shadow: 0 0 25px rgba(81, 43, 212, 0.15);
-}
-
-[data-theme="light"] .scroll-progress {
-    background: var(--gradient-primary);
-}
-
-[data-theme="light"] footer {
-    background: #e5e7eb;
-    border-color: #d1d5db;
-}
-
-[data-theme="light"] footer p {
-    color: #6b7280;
+    --text-secondary: #94a3b8;
+    --glass-bg: rgba(17, 23, 38, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --gradient-primary: linear-gradient(135deg, #6366f1, #ff334b);
+    --gradient-dotnet: linear-gradient(135deg, #512BD4, #6366f1);
+    --gradient-animated: linear-gradient(270deg, #6366f1, #ff334b, #38bdf8, #512BD4);
 }
 
 body {
@@ -125,7 +21,6 @@ body {
     color: white;
     overflow-x: hidden;
     font-family: 'Poppins', sans-serif;
-    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* ============================================
@@ -328,40 +223,6 @@ body {
 .cursor.hover {
     transform: scale(2);
     background-color: rgba(168, 85, 247, 0.3);
-}
-
-/* ============================================
-   THEME TOGGLE
-   ============================================ */
-.theme-toggle {
-    position: fixed;
-    top: 100px;
-    right: 20px;
-    z-index: 1000;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    color: white;
-    font-size: 1.1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.theme-toggle:hover {
-    transform: scale(1.1) rotate(15deg);
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
-}
-
-[data-theme="light"] .theme-toggle {
-    color: #1a1a2e;
-    background: rgba(255, 255, 255, 0.8);
 }
 
 /* ============================================
@@ -1028,29 +889,6 @@ body {
 }
 
 /* ============================================
-   TESTIMONIAL CAROUSEL
-   ============================================ */
-.testimonial-carousel {
-    border-radius: 20px;
-}
-
-.testimonial-dot {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    cursor: pointer;
-}
-
-.testimonial-dot.active {
-    background: var(--primary-purple);
-    box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
-    transform: scale(1.3);
-}
-
-.testimonial-dot:hover {
-    background: rgba(168, 85, 247, 0.5);
-}
-
-/* ============================================
    FLOATING LABEL FORM
    ============================================ */
 .floating-label-group {
@@ -1221,13 +1059,6 @@ body {
         display: none !important;
     }
     
-    .theme-toggle {
-        top: 80px;
-        right: 10px;
-        width: 38px;
-        height: 38px;
-    }
-    
     .back-to-top {
         bottom: 20px;
         right: 20px;
@@ -1238,11 +1069,8 @@ body {
     .counter-number {
         font-size: 2rem;
     }
+}
 
-    .testimonial-slide .glass-card {
-        padding: 1.5rem !important;
-    }
-}        
 /* ============================================
    CREATIVE ANIMATIONS - ELEVATE PROJECT
    ============================================ */
@@ -1392,4 +1220,41 @@ html, body, #projectModal {
 
 .overflow-y-auto {
     scroll-behavior: smooth;
+}
+
+/* ============================================
+   PROJECT FILTERS & CARDS
+   ============================================ */
+.filter-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.filter-btn:hover {
+    background: rgba(99, 102, 241, 0.15);
+    color: #ffffff;
+    border-color: rgba(99, 102, 241, 0.5);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, #512BD4, #6366f1);
+    color: #ffffff;
+    border-color: #6366f1;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+}
+
+.hidden-project {
+    display: none !important;
+}
+
+.project-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.project-item:hover {
+    box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.3);
 }
