@@ -1,925 +1,1032 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amr Mohamed Shawky | Full Stack .NET Engineer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Amr Mohamed Shawky | Full Stack .NET Engineer & Backend Mentor</title>
+    <meta name="description" content="Portfolio of Amr Mohamed Shawky — Full Stack .NET Engineer & Backend Mentor at Elevate Tech. Clean Architecture, CQRS, and Microservices Specialist.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        bgDark: '#090d16',
-                        cardDark: '#111726',
-                        primary: '#6366f1',
-                        secondary: '#ff334b',
-                        dotnet: '#512BD4',
-                        accent: '#38bdf8',
-                        success: '#10b981',
-                    },
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
 </head>
-<body class="antialiased overflow-x-hidden">
+<body>
 
-    <!-- ==================== PRELOADER ==================== -->
+    <!-- Preloader -->
     <div id="preloader" class="preloader">
         <div class="preloader-inner">
-            <div class="preloader-logo">
-                <span class="preloader-text">A</span>
-                <span class="preloader-text">m</span>
-                <span class="preloader-text">r</span>
-                <span class="preloader-text preloader-dot">.</span>
-                <span class="preloader-text">S</span>
-                <span class="preloader-text">h</span>
-                <span class="preloader-text">a</span>
-                <span class="preloader-text">w</span>
-                <span class="preloader-text">k</span>
-                <span class="preloader-text">y</span>
+            <div class="preloader-brand">Amr<span>.Shawky</span></div>
+            <div class="preloader-track">
+                <div class="preloader-bar" id="preloaderBar"></div>
             </div>
-            <div class="preloader-bar">
-                <div class="preloader-bar-fill" id="preloaderBar"></div>
-            </div>
-            <p class="preloader-subtitle">Loading portfolio...</p>
+            <p class="preloader-sub">Engineering Scalable Systems...</p>
         </div>
     </div>
 
-    <!-- Noise Overlay -->
-    <div class="noise-overlay"></div>
-
-    <!-- Interactive Canvas Particles -->
-    <canvas id="particleCanvas" class="particle-canvas"></canvas>
-
-    <!-- Animated Gradient Background -->
-    <div class="gradient-bg-animated"></div>
-
-    <!-- Scroll Progress -->
+    <!-- Scroll Progress Indicator -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- Custom Cursor -->
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-dot" id="cursorDot"></div>
-
-    <!-- Back to Top -->
+    <!-- Back to Top Button -->
     <button id="backToTop" class="back-to-top" aria-label="Back to top">
-        <svg class="back-to-top-ring" viewBox="0 0 36 36">
-            <circle class="back-to-top-ring-bg" cx="18" cy="18" r="16" fill="none" stroke-width="2"/>
-            <circle class="back-to-top-ring-fill" id="progressRing" cx="18" cy="18" r="16" fill="none" stroke-width="2"/>
-        </svg>
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- ==================== NAVIGATION ==================== -->
-    <nav id="navbar" class="navbar-enhanced fixed w-full z-50 top-0 start-0 border-b border-gray-800/50">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="#" class="flex items-center space-x-2 magnetic">
-                <span class="text-2xl font-bold text-white">Amr<span class="text-dotnet">Shawky</span></span>
+    <!-- Navigation Header -->
+    <header class="navbar-custom" id="mainNavbar">
+        <div class="nav-container">
+            <a href="#home" class="brand-logo">
+                <span class="logo-dot"></span>
+                <span>Amr<span class="code-tag">Shawky</span></span>
             </a>
-            <button id="menu-btn" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-700 focus:outline-none">
-                <i class="fas fa-bars text-xl"></i>
+
+            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Navigation">
+                <i class="fas fa-bars"></i>
             </button>
-            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-700 rounded-lg bg-cardDark md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent items-center">
-                    <li><a href="#home" class="nav-link block py-2 px-3 text-white md:p-0 hover:text-dotnet transition animated-underline" data-section="home">Home</a></li>
-                    <li><a href="#about" class="nav-link block py-2 px-3 text-gray-300 md:p-0 hover:text-dotnet transition animated-underline" data-section="about">About</a></li>
-                    <li><a href="#experience" class="nav-link block py-2 px-3 text-gray-300 md:p-0 hover:text-dotnet transition animated-underline" data-section="experience">Journey</a></li>
-                    <li><a href="#skills" class="nav-link block py-2 px-3 text-gray-300 md:p-0 hover:text-dotnet transition animated-underline" data-section="skills">Stack</a></li>
-                    <li><a href="#projects" class="nav-link block py-2 px-3 text-gray-300 md:p-0 hover:text-dotnet transition animated-underline" data-section="projects">Projects</a></li>
-                    <li><a href="#contact" class="nav-link block py-2 px-3 text-gray-300 md:p-0 hover:text-dotnet transition animated-underline" data-section="contact">Contact</a></li>
+
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-item-link active-link" data-section="home">Home</a></li>
+                    <li><a href="#about" class="nav-item-link" data-section="about">About</a></li>
+                    <li><a href="#journey" class="nav-item-link" data-section="journey">Journey</a></li>
+                    <li><a href="#stack" class="nav-item-link" data-section="stack">Stack</a></li>
+                    <li><a href="#projects" class="nav-item-link" data-section="projects">Projects</a></li>
+                    <li><a href="#contact" class="nav-item-link" data-section="contact">Contact</a></li>
                 </ul>
-            </div>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- ==================== HERO SECTION ==================== -->
-    <section id="home" class="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
-        <div class="absolute top-20 left-10 w-72 h-72 bg-dotnet/20 rounded-full blur-[100px] parallax-layer" data-speed="0.3"></div>
-        <div class="absolute bottom-10 right-10 w-80 h-80 bg-secondary/20 rounded-full blur-[100px] parallax-layer" data-speed="0.5"></div>
-        <div class="absolute top-1/2 left-1/2 w-96 h-96 bg-accent/10 rounded-full blur-[120px] parallax-layer" data-speed="0.2"></div>
-
-        <div class="container mx-auto px-6 flex flex-col-reverse md:flex-row items-center">
-            <div class="w-full md:w-1/2 text-center md:text-left mt-10 md:mt-0 z-10">
-                <h2 class="text-xl md:text-2xl font-semibold mb-2 text-gray-300 reveal-up" data-delay="200">Hi, I'm <span class="text-white">Amr Mohamed Shawky</span></h2>
-                <h1 class="text-3xl md:text-5xl font-bold mb-6 glow-text leading-tight reveal-up" data-delay="400">
-                    <span class="text-gradient">Full Stack .NET Engineer</span> <br>
-                    <span class="text-gray-400 text-lg md:text-2xl mt-2 block">& Technical Content Creator</span>
-                </h1>
-                
-                <div class="typing-container mb-6 reveal-up" data-delay="600">
-                    <span class="typing-text" id="typingText"></span>
-                </div>
-                
-                <div class="flex flex-wrap gap-2.5 justify-center md:justify-start mb-6 reveal-up" data-delay="800">
-                    <span class="bg-blue-900/40 text-blue-300 text-xs font-bold px-3.5 py-1.5 rounded-full border border-blue-700/60 shadow-sm floating-badge"><i class="fab fa-linkedin text-blue-400 mr-1.5"></i> Ranked #6 LinkedIn Egypt 🇪🇬</span>
-                    <span class="bg-purple-900/40 text-purple-300 text-xs font-bold px-3.5 py-1.5 rounded-full border border-purple-700/60 shadow-sm floating-badge" style="animation-delay: 0.4s;"><i class="fas fa-graduation-cap text-yellow-400 mr-1.5"></i> CS Graduate · Grade A+ (3.2 GPA)</span>
-                    <span class="bg-gray-800/80 text-gray-300 text-xs font-bold px-3.5 py-1.5 rounded-full border border-gray-700 shadow-sm floating-badge" style="animation-delay: 0.8s;"><i class="fas fa-map-marker-alt text-red-400 mr-1.5"></i> Cairo, Badr City 🇪🇬</span>
-                </div>
-
-                <p class="text-gray-400 text-base md:text-lg mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed reveal-up" data-delay="1000">
-                    Moving beyond code to <strong>engineering scalable solutions</strong>. Specializing in Clean Architecture, CQRS, and Vertical Slices to build robust, high-performance systems.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start reveal-up" data-delay="1200">
-                    <a href="AmrMohamedCV(FullStack).pdf" download class="px-8 py-3 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition shadow-lg btn-enhanced ripple magnetic">
-                        Download CV <i class="fas fa-download ml-2"></i>
-                    </a>
-                    <a href="#projects" class="px-8 py-3 rounded-full bg-gradient-to-r from-dotnet to-primary text-white font-semibold hover:opacity-90 transition shadow-lg shadow-purple-500/30 btn-enhanced ripple magnetic">
-                        View Projects <i class="fas fa-arrow-down ml-2"></i>
-                    </a>
-                </div>
-                
-                <div class="flex items-center gap-6 justify-center md:justify-start mt-8 reveal-up" data-delay="1400">
-                    <a href="https://github.com/Amr-shawky" target="_blank" class="text-gray-400 hover:text-white transition text-2xl magnetic social-icon"><i class="fab fa-github"></i></a>
-                    <a href="https://www.youtube.com/@Eng_Amr" target="_blank" class="text-gray-400 hover:text-red-600 transition text-2xl magnetic social-icon"><i class="fab fa-youtube"></i></a>
-                    <a href="https://www.linkedin.com/in/3mrshawky/" target="_blank" class="text-gray-400 hover:text-blue-600 transition text-2xl magnetic social-icon"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-
-            <div class="w-full md:w-1/2 flex justify-center z-10 relative">
-                <div class="relative w-72 h-72 md:w-96 md:h-96 reveal-scale" id="heroImage">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-dotnet to-secondary rounded-full blur-md opacity-50 animate-pulse"></div>
-                    <img src="img3.png" alt="Amr Shawky" class="relative w-full h-full object-cover border-4 border-gray-700/80 blob-shape shadow-2xl transition duration-500 hover:scale-105">
-                    
-                    <div class="absolute -top-6 right-0 bg-[#171717] p-3 rounded-full border border-gray-700 float-icon shadow-lg shadow-purple-500/20 z-20 neon-glow-pulse">
-                        <i class="fas fa-cube text-3xl text-[#512BD4]"></i>
+    <!-- Main Content -->
+    <main>
+        <!-- ==================== HERO SECTION ==================== -->
+        <section id="home" class="hero-section">
+            <div class="hero-grid">
+                <div class="hero-details">
+                    <div class="hero-status-badge">
+                        <span class="live-dot"></span>
+                        <span>Full-Time Engineer & Backend (.NET) Mentor</span>
                     </div>
-                    <div class="absolute bottom-10 -left-6 bg-[#171717] p-3 rounded-full border border-gray-700 float-icon shadow-lg shadow-red-500/20 z-20" style="animation-delay: 1.5s;">
-                        <i class="fab fa-angular text-3xl text-red-600"></i>
-                    </div>
-                    <div class="absolute top-1/2 -right-8 bg-[#171717] p-2 rounded-full border border-gray-700 float-icon shadow-lg shadow-green-500/20 z-20" style="animation-delay: 0.5s;">
-                        <i class="fas fa-database text-2xl text-green-500"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Scroll indicator -->
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-indicator">
-            <div class="scroll-mouse">
-                <div class="scroll-wheel"></div>
-            </div>
-            <p class="text-gray-500 text-xs mt-2 text-center">Scroll Down</p>
-        </div>
-    </section>
+                    <p class="hero-intro">Hello World, I'm</p>
+                    <h1 class="hero-title">
+                        Amr Mohamed <br>
+                        <span class="text-gradient">Shawky</span>
+                    </h1>
 
-    <!-- ==================== ABOUT SECTION ==================== -->
-    <section id="about" class="py-20 bg-black/30 relative section-reveal">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16 section-title">About <span class="text-gradient">Me</span></h2>
-            
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="w-full md:w-1/3 flex justify-center reveal-left">
-                    <div class="relative w-64 h-64 rounded-xl p-1 gradient-border rotate-3 hover:rotate-0 transition duration-300">
-                        <div class="absolute inset-0 bg-black opacity-20"></div>
-                        <img src="img3.png" alt="Profile" class="w-full h-full object-cover rounded-xl border-4 border-bgDark relative z-10">
+                    <div class="hero-subhead">
+                        <span>Full Stack .NET Engineer</span>
+                        <span class="highlight-role">& Technical Content Creator</span>
                     </div>
-                </div>
-                
-                <div class="w-full md:w-2/3 reveal-right">
-                    <h3 class="text-2xl font-bold mb-4 text-white">Full Stack .NET Engineer & Technical Content Creator</h3>
-                    <p class="text-gray-400 mb-4 leading-relaxed text-lg">
-                        Hi, I'm <strong>Amr Mohamed Shawky</strong>, a <strong>Computer Science Graduate from Benha University</strong> based in <strong>Cairo, Badr City, Egypt 🇪🇬</strong>. 
-                        I specialize in <strong>engineering scalable enterprise solutions</strong>, moving beyond boilerplate code to craft resilient systems using 
-                        <span class="text-dotnet font-semibold">Clean Architecture</span>, 
-                        <span class="text-dotnet font-semibold">CQRS</span>, and 
-                        <span class="text-dotnet font-semibold">Vertical Slices</span>.
-                    </p>
-                    <p class="text-gray-400 mb-6 leading-relaxed text-lg">
-                        Promoted to <strong>Full-Time Full Stack Software Engineer & Backend (.NET) Mentor</strong> at Elevate Tech, I deploy production-grade applications, design distributed architectures, and mentor aspiring software engineers. 
-                        Ranked <strong>#6 on LinkedIn Egypt</strong>, I share deep-dive architectural tutorials on my 
-                        <a href="https://www.youtube.com/@Eng_Amr" target="_blank" class="text-red-400 hover:underline font-bold">YouTube channel</a>.
+
+                    <div class="typing-box">
+                        <i class="fas fa-terminal"></i>
+                        <span id="typingOutput"></span>
+                        <span class="typing-cursor"></span>
+                    </div>
+
+                    <!-- Highlight Badges -->
+                    <div class="hero-achievements-row">
+                        <span class="achievement-pill linkedin">
+                            <i class="fab fa-linkedin text-blue-400"></i> Ranked #6 LinkedIn Egypt 🇪🇬
+                        </span>
+                        <span class="achievement-pill academic">
+                            <i class="fas fa-graduation-cap text-purple-400"></i> CS Graduate · Grade A+ (3.2 GPA)
+                        </span>
+                        <span class="achievement-pill location">
+                            <i class="fas fa-map-marker-alt text-rose-400"></i> Cairo, Badr City 🇪🇬
+                        </span>
+                    </div>
+
+                    <p class="hero-description">
+                        Moving beyond boilerplate code to <strong>engineering scalable, resilient enterprise solutions</strong>. 
+                        Specializing in Clean Architecture, CQRS, Domain-Driven Design, and high-performance microservices.
                     </p>
 
-                    <!-- Academic & Impact Highlights -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-                        <div class="glass-card p-3 text-center rounded-xl border border-dotnet/20">
-                            <div class="text-dotnet font-extrabold text-xl">Grade A+</div>
-                            <div class="text-xs text-gray-400 mt-1">Grad Project (PayOn)</div>
-                        </div>
-                        <div class="glass-card p-3 text-center rounded-xl border border-accent/20">
-                            <div class="text-accent font-extrabold text-xl">3.2 GPA</div>
-                            <div class="text-xs text-gray-400 mt-1">Academic CS Score</div>
-                        </div>
-                        <div class="glass-card p-3 text-center rounded-xl border border-secondary/20">
-                            <div class="text-secondary font-extrabold text-xl">#6 Creator</div>
-                            <div class="text-xs text-gray-400 mt-1">LinkedIn Egypt</div>
-                        </div>
-                        <div class="glass-card p-3 text-center rounded-xl border border-emerald-500/20">
-                            <div class="text-emerald-400 font-extrabold text-xl">Full-Time</div>
-                            <div class="text-xs text-gray-400 mt-1">Engineer & Mentor</div>
-                        </div>
+                    <div class="hero-cta-group">
+                        <a href="#projects" class="btn-modern btn-modern-primary">
+                            <span>Explore Projects</span>
+                            <i class="fas fa-arrow-down"></i>
+                        </a>
+                        <a href="AmrMohamedCV(FullStack).pdf" download class="btn-modern btn-modern-secondary">
+                            <span>Download CV</span>
+                            <i class="fas fa-download"></i>
+                        </a>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div class="flex items-start gap-4 glass-card p-4 tilt-card">
-                            <div class="tilt-card-shine"></div>
-                            <div class="p-3 bg-dotnet/10 rounded-lg text-dotnet">
-                                <i class="fas fa-layer-group text-2xl"></i>
+                    <div class="hero-social-list">
+                        <a href="https://www.linkedin.com/in/3mrshawky/" target="_blank" rel="noopener" class="social-pill-btn linkedin" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/Amr-shawky" target="_blank" rel="noopener" class="social-pill-btn github" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@Eng_Amr" target="_blank" rel="noopener" class="social-pill-btn youtube" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="mailto:amrshawky936@gmail.com" class="social-pill-btn" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Portrait Visual -->
+                <div class="hero-visual-wrapper">
+                    <div class="portrait-frame">
+                        <img src="img3.png" alt="Amr Mohamed Shawky" class="portrait-photo">
+
+                        <!-- Top-Right Floating Chip -->
+                        <div class="floating-hero-chip top-right">
+                            <div class="chip-icon-box dotnet">
+                                <i class="fas fa-cubes"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-white text-lg">Enterprise Architecture</h4>
-                                <p class="text-sm text-gray-500">Designing high-throughput systems with CQRS, DDD & Event-Driven Microservices.</p>
+                                <div class="chip-title">.NET 8 Ecosystem</div>
+                                <div class="chip-desc">Clean Arch & CQRS</div>
                             </div>
                         </div>
-                        <div class="flex items-start gap-4 glass-card p-4 tilt-card">
-                            <div class="tilt-card-shine"></div>
-                            <div class="p-3 bg-secondary/10 rounded-lg text-secondary">
-                                <i class="fas fa-chalkboard-teacher text-2xl"></i>
+
+                        <!-- Bottom-Left Floating Chip -->
+                        <div class="floating-hero-chip bottom-left">
+                            <div class="chip-icon-box award">
+                                <i class="fas fa-trophy"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-white text-lg">Technical Mentorship</h4>
-                                <p class="text-sm text-gray-500">Guiding engineers at Elevate Tech & publishing advanced educational videos.</p>
+                                <div class="chip-title">Grade A+ (Distinction)</div>
+                                <div class="chip-desc">PayOn Fintech Platform</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ==================== EXPERIENCE & EDUCATION SECTION ==================== -->
-    <section id="experience" class="py-20 relative section-reveal">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16 section-title">My <span class="text-gradient">Journey</span></h2>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div class="reveal-left">
-                    <h3 class="text-2xl font-bold mb-8 flex items-center gap-3 text-white">
-                        <i class="fas fa-graduation-cap text-dotnet"></i> Education & Internships
-                    </h3>
-                    <div class="space-y-12 border-l-2 border-gray-800 ml-3 pl-8 relative timeline-line">
-                        <div class="relative timeline-item">
-                            <span class="timeline-dot absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-dotnet border-4 border-bgDark"></span>
-                            <div class="flex items-center justify-between flex-wrap gap-2">
-                                <h4 class="text-xl font-bold text-white">Computer Science Graduate</h4>
-                                <span class="text-xs px-2.5 py-0.5 rounded-full bg-green-900/40 text-green-400 border border-green-700/60 font-bold">Graduated</span>
+        <!-- ==================== ABOUT SECTION (BENTO GRID) ==================== -->
+        <section id="about" class="section-wrapper surface-bg">
+            <div class="container-custom">
+                <div class="section-header-block center">
+                    <span class="section-tag"><i class="fas fa-user-astronaut"></i> Background</span>
+                    <h2 class="section-heading">About <span class="text-gradient">Me</span></h2>
+                    <p class="section-subtitle">
+                        Computer Science Graduate, Full Stack .NET Engineer & Mentor with a passion for software craftsmanship.
+                    </p>
+                </div>
+
+                <!-- Bento Grid Layout -->
+                <div class="bento-showcase-grid">
+                    <!-- Bio Card (Span 8) -->
+                    <div class="bento-box bento-bio-card">
+                        <div>
+                            <div class="bio-greeting-badge">// WHO I AM</div>
+                            <h3 class="bio-title">Architecting High-Throughput Systems with Precision & Purpose</h3>
+                            <p class="bio-text">
+                                Hi, I'm <strong>Amr Mohamed Shawky</strong>, a <strong>Computer Science Graduate from Benha University (Faculty of Computers & Artificial Intelligence)</strong>, residing in <strong>Cairo, Badr City, Egypt 🇪🇬</strong>.
+                            </p>
+                            <p class="bio-text">
+                                Promoted to <strong>Full-Time Full Stack Software Engineer & Backend (.NET) Mentor</strong> at <strong>Elevate Tech Company</strong>, I engineer production platforms serving live users, design distributed systems, and mentor the next generation of engineers.
+                            </p>
+                            <p class="bio-text">
+                                Ranked <strong>#6 on LinkedIn Egypt</strong>, I share deep-dive architectural tutorials on my <a href="https://www.youtube.com/@Eng_Amr" target="_blank" rel="noopener" style="color: var(--accent-rose); font-weight: 700; text-decoration: underline;">YouTube channel</a> covering event-driven patterns, clean code, and cloud microservices.
+                            </p>
+                        </div>
+
+                        <div class="bio-pillars">
+                            <div class="pillar-item">
+                                <div class="pillar-icon"><i class="fas fa-sitemap"></i></div>
+                                <div class="pillar-title">Enterprise Arch</div>
+                                <div class="pillar-sub">CQRS & Vertical Slice</div>
                             </div>
-                            <p class="text-primary text-sm font-semibold mb-2">Benha University · Faculty of Computers & Artificial Intelligence</p>
-                            <div class="flex flex-wrap gap-2 my-2">
-                                <span class="text-xs px-3 py-1 rounded-md bg-green-900/30 text-green-300 border border-green-700/50 font-bold"><i class="fas fa-trophy mr-1 text-yellow-400"></i> Graduation Project: Grade A+</span>
-                                <span class="text-xs px-3 py-1 rounded-md bg-blue-900/30 text-blue-300 border border-blue-700/50 font-bold"><i class="fas fa-star mr-1 text-blue-400"></i> Cumulative GPA: 3.2</span>
+                            <div class="pillar-item">
+                                <div class="pillar-icon"><i class="fas fa-bolt"></i></div>
+                                <div class="pillar-title">High Throughput</div>
+                                <div class="pillar-sub">Redis & RabbitMQ</div>
                             </div>
-                            <p class="text-gray-400 text-sm mt-2">Specialized in Software Engineering, Distributed Systems, Data Structures & Algorithms, and Database Architecture. Graduation project PayOn evaluated with highest honors (Distinction).</p>
-                        </div>
-                        <div class="relative timeline-item">
-                            <span class="timeline-dot absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-accent border-4 border-bgDark"></span>
-                            <h4 class="text-xl font-bold text-white">Full Stack .NET Developer</h4>
-                            <p class="text-accent text-sm font-semibold mb-2">Digital Egypt Pioneers Initiative (DEPI) · Scholarship</p>
-                            <p class="text-gray-400 text-sm">Comprehensive track covering enterprise ASP.NET Core, Entity Framework Core, SQL Server, Clean Architecture, and Angular web engineering.</p>
-                        </div>
-                        <div class="relative timeline-item">
-                            <span class="timeline-dot absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-secondary border-4 border-bgDark"></span>
-                            <h4 class="text-xl font-bold text-white">MEAN Stack Developer</h4>
-                            <p class="text-secondary text-sm font-semibold mb-2">National Telecommunication Institute (NTI) · Internship</p>
-                            <p class="text-gray-400 text-sm">Engineered full-stack TypeScript applications with MongoDB, Express.js, Angular, and Node.js with RESTful design.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="reveal-right">
-                    <h3 class="text-2xl font-bold mb-8 flex items-center gap-3 text-white">
-                        <i class="fas fa-briefcase text-secondary"></i> Professional Experience
-                    </h3>
-                    <div class="space-y-12 border-l-2 border-gray-800 ml-3 pl-8 relative timeline-line">
-                        <div class="relative timeline-item">
-                            <span class="timeline-dot absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-success border-4 border-bgDark"></span>
-                            <div class="flex items-center justify-between flex-wrap gap-2">
-                                <h4 class="text-xl font-bold text-white">Full Stack Software Engineer & Backend (.NET) Mentor</h4>
-                                <span class="text-xs px-2.5 py-0.5 rounded-full bg-success/20 text-success border border-success/40 font-bold">Promoted · Full-Time</span>
+                            <div class="pillar-item">
+                                <div class="pillar-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                                <div class="pillar-title">Tech Mentorship</div>
+                                <div class="pillar-sub">Elevate Bootcamp & Videos</div>
                             </div>
-                            <p class="text-success text-sm font-semibold mb-2">Elevate Tech Company · Remote</p>
-                            <ul class="list-disc list-inside text-gray-400 text-sm space-y-1 mt-2">
-                                <li>Promoted to Full-Time Full Stack Software Engineer & Backend Mentor.</li>
-                                <li>Architected and shipped production enterprise platforms deployed live on Hostinger & Cloud.</li>
-                                <li>Mentoring backend engineers in Clean Architecture, CQRS, MediatR, and microservice communication.</li>
-                                <li>Conducted in-depth code reviews, architecture guidance, and performance optimization workshops.</li>
-                            </ul>
                         </div>
-                        <div class="relative timeline-item">
-                            <span class="timeline-dot absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-dotnet border-4 border-bgDark"></span>
-                            <h4 class="text-xl font-bold text-white">Backend .NET Developer</h4>
-                            <p class="text-gray-300 text-sm font-semibold mb-2">ROUTE IT Training Center</p>
-                            <p class="text-gray-400 text-sm">Designed high-performance RESTful APIs, implemented CQRS with MediatR, and architected scalable SQL database schemas.</p>
+                    </div>
+
+                    <!-- Mini Stat Units (Span 4) -->
+                    <div class="bento-box bento-stat-card">
+                        <div class="mini-stat-unit">
+                            <div class="stat-unit-val gold">Grade A+</div>
+                            <div class="stat-unit-label">Grad Project (PayOn Fintech Distinction)</div>
                         </div>
-                        <div class="relative timeline-item">
-                            <span class="timeline-dot absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-secondary border-4 border-bgDark"></span>
-                            <h4 class="text-xl font-bold text-white">Frontend (Angular) Web Developer</h4>
-                            <p class="text-gray-300 text-sm font-semibold mb-2">ROUTE IT Training Center</p>
-                            <p class="text-gray-400 text-sm">Developed interactive, reactive single-page applications using Angular, TypeScript, RxJS, and Tailwind CSS.</p>
+                        <div class="mini-stat-unit">
+                            <div class="stat-unit-val cyan">3.2 GPA</div>
+                            <div class="stat-unit-label">Cumulative Academic CS Score</div>
                         </div>
-                        <div class="relative timeline-item">
-                            <span class="timeline-dot absolute -left-[41px] top-1 w-5 h-5 rounded-full bg-gray-600 border-4 border-bgDark"></span>
-                            <h4 class="text-xl font-bold text-white">Software Engineer</h4>
-                            <p class="text-gray-300 text-sm font-semibold mb-2">Comec Company</p>
-                            <ul class="list-disc list-inside text-gray-400 text-sm space-y-1 mt-2">
-                                <li>Developed reporting systems and Crystal Reports to streamline client data access.</li>
-                                <li>Optimized complex SQL Server queries, procedures, indexes, and automated data backups.</li>
-                            </ul>
+                        <div class="mini-stat-unit">
+                            <div class="stat-unit-val purple">#6 Creator</div>
+                            <div class="stat-unit-label">LinkedIn Ranking in Egypt 🇪🇬</div>
+                        </div>
+                        <div class="mini-stat-unit">
+                            <div class="stat-unit-val green">Full-Time</div>
+                            <div class="stat-unit-label">Engineer & Mentor at Elevate Tech</div>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card 1 (Span 6) -->
+                    <div class="bento-box bento-detail-card">
+                        <div class="detail-card-icon arch">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <div class="detail-card-content">
+                            <h4>Distributed Architectures</h4>
+                            <p>Decoupling monolithic logic into event-driven microservices using YARP API Gateway, gRPC, RabbitMQ with MassTransit, and resilient Polly policies.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card 2 (Span 6) -->
+                    <div class="bento-box bento-detail-card">
+                        <div class="detail-card-icon mentor">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="detail-card-content">
+                            <h4>Engineering Mentorship</h4>
+                            <p>Guiding backend developers at Elevate Tech through code reviews, architectural workshops, MediatR pipelines, and real-world system design practices.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ==================== TECH STACK SECTION ==================== -->
-    <section id="skills" class="py-20 relative bg-black/40 section-reveal">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 section-title">Technical <span class="text-gradient-blue">Skills</span></h2>
-
-            <!-- Skill Categories Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-16 stagger-container" id="skillsGrid">
-                <div class="stagger-item glass-card p-6 tilt-card">
-                    <div class="tilt-card-shine"></div>
-                    <div class="w-12 h-12 rounded-lg bg-dotnet/20 flex items-center justify-center mb-4 group-hover:bg-dotnet/40 transition">
-                        <i class="fas fa-server text-dotnet text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold mb-4 text-white">Backend & .NET</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tech-badge">.NET 8 / Core</span>
-                        <span class="tech-badge">ASP.NET MVC</span>
-                        <span class="tech-badge">Web API</span>
-                        <span class="tech-badge">EF Core</span>
-                        <span class="tech-badge">LINQ</span>
-                        <span class="tech-badge">Hangfire</span>
-                        <span class="tech-badge">SignalR</span>
-                        <span class="tech-badge">ADO.NET</span>
-                    </div>
+        <!-- ==================== JOURNEY / TIMELINE SECTION ==================== -->
+        <section id="journey" class="section-wrapper">
+            <div class="container-custom">
+                <div class="section-header-block center">
+                    <span class="section-tag"><i class="fas fa-route"></i> Career Pathway</span>
+                    <h2 class="section-heading">My <span class="text-gradient">Journey</span></h2>
+                    <p class="section-subtitle">
+                        Academic milestones, scholarships, and professional engineering achievements.
+                    </p>
                 </div>
 
-                <div class="stagger-item glass-card p-6 tilt-card">
-                    <div class="tilt-card-shine"></div>
-                    <div class="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-network-wired text-accent text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold mb-4 text-white">Arch & DevOps</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tech-badge">Microservices</span>
-                        <span class="tech-badge">Vertical Slice</span>
-                        <span class="tech-badge">CQRS</span>
-                        <span class="tech-badge">Clean Arch</span>
-                        <span class="tech-badge">Docker</span>
-                        <span class="tech-badge">Azure</span>
-                        <span class="tech-badge">CI/CD (GitHub Actions)</span>
-                        <span class="tech-badge">Ocelot</span>
-                    </div>
-                </div>
+                <div class="journey-grid-layout">
+                    <!-- Left: Education & Internships -->
+                    <div class="journey-column">
+                        <h3 class="journey-column-title">
+                            <i class="fas fa-university"></i> Education & Scholarships
+                        </h3>
 
-                <div class="stagger-item glass-card p-6 tilt-card">
-                    <div class="tilt-card-shine"></div>
-                    <div class="w-12 h-12 rounded-lg bg-success/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-database text-success text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold mb-4 text-white">Data & Messaging</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tech-badge">SQL Server</span>
-                        <span class="tech-badge">PostgreSQL</span>
-                        <span class="tech-badge">Redis (Caching)</span>
-                        <span class="tech-badge">MongoDB</span>
-                        <span class="tech-badge">RabbitMQ</span>
-                        <span class="tech-badge">MassTransit</span>
-                    </div>
-                </div>
+                        <div class="journey-stream">
+                            <!-- Benha University -->
+                            <div class="journey-node">
+                                <span class="node-bullet"></span>
+                                <div class="node-card">
+                                    <div class="node-header">
+                                        <h4 class="node-role">Computer Science Graduate</h4>
+                                        <span class="node-tag-badge grad">Graduated</span>
+                                    </div>
+                                    <div class="node-org">Benha University · Faculty of Computers & Artificial Intelligence</div>
+                                    <div class="node-badges-row">
+                                        <span class="node-pill highlight"><i class="fas fa-trophy mr-1 text-yellow-400"></i> Grad Project: Grade A+ (Distinction)</span>
+                                        <span class="node-pill"><i class="fas fa-star mr-1 text-blue-400"></i> GPA: 3.2</span>
+                                    </div>
+                                    <p class="node-text">
+                                        Specialized in Software Engineering, Distributed Systems, Data Structures & Algorithms, and Database Architecture. Graduation project PayOn evaluated with highest academic honors.
+                                    </p>
+                                </div>
+                            </div>
 
-                <div class="stagger-item glass-card p-6 tilt-card">
-                    <div class="tilt-card-shine"></div>
-                    <div class="w-12 h-12 rounded-lg bg-secondary/20 flex items-center justify-center mb-4">
-                        <i class="fas fa-laptop-code text-secondary text-xl"></i>
+                            <!-- DEPI -->
+                            <div class="journey-node">
+                                <span class="node-bullet"></span>
+                                <div class="node-card">
+                                    <div class="node-header">
+                                        <h4 class="node-role">Full Stack .NET Developer</h4>
+                                        <span class="node-tag-badge scholarship">Scholarship</span>
+                                    </div>
+                                    <div class="node-org">Digital Egypt Pioneers Initiative (DEPI)</div>
+                                    <p class="node-text">
+                                        Comprehensive governmental professional track covering enterprise ASP.NET Core, EF Core, SQL Server, Clean Architecture, and Angular web engineering.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- NTI -->
+                            <div class="journey-node">
+                                <span class="node-bullet"></span>
+                                <div class="node-card">
+                                    <div class="node-header">
+                                        <h4 class="node-role">MEAN Stack Developer</h4>
+                                        <span class="node-tag-badge scholarship">Internship</span>
+                                    </div>
+                                    <div class="node-org">National Telecommunication Institute (NTI)</div>
+                                    <p class="node-text">
+                                        Engineered full-stack TypeScript applications with MongoDB, Express.js, Angular, and Node.js with secure RESTful APIs and state management.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-lg font-bold mb-4 text-white">Frontend & Tools</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tech-badge">Angular</span>
-                        <span class="tech-badge">TypeScript</span>
-                        <span class="tech-badge">Tailwind CSS</span>
-                        <span class="tech-badge">RxJS</span>
-                        <span class="tech-badge">xUnit / Moq</span>
-                        <span class="tech-badge">Git / Postman</span>
-                        <span class="tech-badge">Agile / Scrum</span>
+
+                    <!-- Right: Professional Experience -->
+                    <div class="journey-column">
+                        <h3 class="journey-column-title">
+                            <i class="fas fa-briefcase"></i> Professional Experience
+                        </h3>
+
+                        <div class="journey-stream">
+                            <!-- Elevate Tech -->
+                            <div class="journey-node">
+                                <span class="node-bullet"></span>
+                                <div class="node-card">
+                                    <div class="node-header">
+                                        <h4 class="node-role">Full Stack Engineer & Backend (.NET) Mentor</h4>
+                                        <span class="node-tag-badge promoted">Promoted · Full-Time</span>
+                                    </div>
+                                    <div class="node-org">Elevate Tech Company · Remote</div>
+                                    <ul class="node-bullets-list">
+                                        <li>Promoted to Full-Time Full Stack Software Engineer & Backend (.NET) Mentor.</li>
+                                        <li>Architected and shipped production enterprise platforms deployed live on Hostinger & Azure Cloud.</li>
+                                        <li>Mentoring backend engineers in Clean Architecture, CQRS, MediatR, and microservice communication.</li>
+                                        <li>Conducted comprehensive architecture reviews, security auditing, and query optimization workshops.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- ROUTE Backend -->
+                            <div class="journey-node">
+                                <span class="node-bullet"></span>
+                                <div class="node-card">
+                                    <div class="node-header">
+                                        <h4 class="node-role">Backend .NET Developer</h4>
+                                    </div>
+                                    <div class="node-org">ROUTE IT Training Center</div>
+                                    <p class="node-text">
+                                        Designed high-performance RESTful APIs, implemented CQRS with MediatR, and architected normalized SQL Server database schemas with indexing and stored procedures.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- ROUTE Frontend -->
+                            <div class="journey-node">
+                                <span class="node-bullet"></span>
+                                <div class="node-card">
+                                    <div class="node-header">
+                                        <h4 class="node-role">Frontend (Angular) Web Developer</h4>
+                                    </div>
+                                    <div class="node-org">ROUTE IT Training Center</div>
+                                    <p class="node-text">
+                                        Developed interactive, reactive single-page applications using Angular, TypeScript, RxJS, and modern utility-first CSS frameworks.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Comec -->
+                            <div class="journey-node">
+                                <span class="node-bullet"></span>
+                                <div class="node-card">
+                                    <div class="node-header">
+                                        <h4 class="node-role">Software Engineer</h4>
+                                    </div>
+                                    <div class="node-org">Comec Company</div>
+                                    <p class="node-text">
+                                        Engineered reporting subsystems and Crystal Reports for client business data. Optimized complex SQL queries, procedures, indexes, and automated daily data backups.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Skill Progress Bars -->
-            <div class="max-w-4xl mx-auto reveal-up">
-                <h3 class="text-2xl font-bold mb-8 text-center text-white">Proficiency <span class="text-gradient">Levels</span></h3>
-                <div class="space-y-6" id="skillBars">
-                    <div class="skill-bar-item">
-                        <div class="flex justify-between mb-2">
-                            <span class="text-white font-medium">C# / .NET Core</span>
-                            <span class="text-primary skill-percent" data-target="92">0%</span>
-                        </div>
-                        <div class="skill-progress-bar"><div class="skill-progress-fill" data-width="92"></div></div>
-                    </div>
-                    <div class="skill-bar-item">
-                        <div class="flex justify-between mb-2">
-                            <span class="text-white font-medium">Clean Architecture / CQRS</span>
-                            <span class="text-primary skill-percent" data-target="88">0%</span>
-                        </div>
-                        <div class="skill-progress-bar"><div class="skill-progress-fill" data-width="88"></div></div>
-                    </div>
-                    <div class="skill-bar-item">
-                        <div class="flex justify-between mb-2">
-                            <span class="text-white font-medium">SQL Server / PostgreSQL</span>
-                            <span class="text-primary skill-percent" data-target="85">0%</span>
-                        </div>
-                        <div class="skill-progress-bar"><div class="skill-progress-fill" data-width="85"></div></div>
-                    </div>
-                    <div class="skill-bar-item">
-                        <div class="flex justify-between mb-2">
-                            <span class="text-white font-medium">Docker / Microservices</span>
-                            <span class="text-primary skill-percent" data-target="80">0%</span>
-                        </div>
-                        <div class="skill-progress-bar"><div class="skill-progress-fill" data-width="80"></div></div>
-                    </div>
-                    <div class="skill-bar-item">
-                        <div class="flex justify-between mb-2">
-                            <span class="text-white font-medium">Angular / TypeScript</span>
-                            <span class="text-primary skill-percent" data-target="78">0%</span>
-                        </div>
-                        <div class="skill-progress-bar"><div class="skill-progress-fill" data-width="78"></div></div>
-                    </div>
-                    <div class="skill-bar-item">
-                        <div class="flex justify-between mb-2">
-                            <span class="text-white font-medium">Redis / RabbitMQ</span>
-                            <span class="text-primary skill-percent" data-target="75">0%</span>
-                        </div>
-                        <div class="skill-progress-bar"><div class="skill-progress-fill" data-width="75"></div></div>
-                    </div>
+        <!-- ==================== TECH STACK SECTION ==================== -->
+        <section id="stack" class="section-wrapper surface-bg">
+            <div class="container-custom">
+                <div class="section-header-block center">
+                    <span class="section-tag"><i class="fas fa-microchip"></i> Technologies</span>
+                    <h2 class="section-heading">Technical <span class="text-gradient">Stack</span></h2>
+                    <p class="section-subtitle">
+                        Battle-tested tools and frameworks used to engineer robust, high-availability software systems.
+                    </p>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- ==================== STATS SECTION ==================== -->
-    <section class="py-16 bg-black/40 relative section-reveal">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 stagger-container" id="statsGrid">
-                <div class="stagger-item text-center p-6 glass-card neumorphic">
-                    <div class="counter-number text-dotnet" data-target="3">0</div>
-                    <p class="text-gray-300 font-semibold mt-2">Years Engineering</p>
-                </div>
-                <div class="stagger-item text-center p-6 glass-card neumorphic">
-                    <div class="counter-number text-accent" data-target="16">0</div>
-                    <p class="text-gray-300 font-semibold mt-2">Projects Shipped</p>
-                </div>
-                <div class="stagger-item text-center p-6 glass-card neumorphic">
-                    <div class="counter-number text-secondary" data-target="6">0</div>
-                    <p class="text-gray-300 font-semibold mt-2">Ranked #6 LinkedIn 🇪🇬</p>
-                </div>
-                <div class="stagger-item text-center p-6 glass-card neumorphic">
-                    <div class="counter-number text-emerald-400" data-target="10">0</div>
-                    <p class="text-gray-300 font-semibold mt-2">Distributed Microservices</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== FEATURED PROJECTS SECTION ==================== -->
-    <section id="projects" class="py-20 relative section-reveal">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 section-title">Featured <span class="text-gradient">Projects</span></h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">A selection of my recent work showcasing Full Stack development, Microservices Architecture, and Cloud Solutions</p>
-            </div>
-            
-            <!-- Filter Tabs -->
-            <div class="flex flex-wrap justify-center gap-3 mb-12 reveal-up">
-                <button class="filter-btn active px-6 py-2 rounded-full text-sm font-medium transition" data-filter="all">All</button>
-                <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition" data-filter="backend">Backend</button>
-                <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition" data-filter="frontend">Frontend</button>
-                <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition" data-filter="microservices">Microservices</button>
-                <button class="filter-btn px-6 py-2 rounded-full text-sm font-medium transition" data-filter="fullstack">Full Stack</button>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
-                
-                <!-- 1. PayOn - Graduation Project (Grade A+) -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border-2 border-green-500/40 flex flex-col h-full group tilt-card cursor-pointer hover:border-green-500 transition-all" data-category="fullstack backend" data-project="payon">
-                    <div class="h-48 bg-gradient-to-br from-green-950/50 to-dotnet/30 relative overflow-hidden flex items-center justify-center">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="PayOn Fintech Platform" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute top-3 right-3 z-20">
-                            <span class="bg-green-950/90 text-green-300 text-xs font-black px-3 py-1 rounded-full border border-green-500/70 shadow-lg flex items-center gap-1.5">
-                                <i class="fas fa-trophy text-yellow-400"></i> Grade A+ (Distinction)
-                            </span>
+                <!-- 4 Categories Grid -->
+                <div class="tech-matrix-grid">
+                    <!-- 1. Backend & .NET -->
+                    <div class="matrix-category-card">
+                        <div class="cat-header-icon c-purple">
+                            <i class="fas fa-server"></i>
                         </div>
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">💳 PayOn Fintech Platform</h3>
-                            <span class="text-xs text-gray-300">Graduation Project · Financial Ecosystem</span>
+                        <h3>Backend & .NET</h3>
+                        <div class="skills-pill-cloud">
+                            <span class="tech-tag-chip">.NET 8 / Core</span>
+                            <span class="tech-tag-chip">ASP.NET MVC</span>
+                            <span class="tech-tag-chip">Web API</span>
+                            <span class="tech-tag-chip">EF Core</span>
+                            <span class="tech-tag-chip">LINQ</span>
+                            <span class="tech-tag-chip">Hangfire</span>
+                            <span class="tech-tag-chip">SignalR</span>
+                            <span class="tech-tag-chip">ADO.NET</span>
+                            <span class="tech-tag-chip">JWT Auth</span>
                         </div>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col">
-                        <p class="text-gray-400 text-sm mb-4 flex-1">Scalable multi-tenant financial & digital payment ecosystem with Clean Architecture, CQRS, MediatR, multi-currency processing, and automatic ledger reconciliation.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="tech-badge border-dotnet text-dotnet">.NET 8</span>
-                            <span class="tech-badge border-green-500 text-green-400">Clean Arch</span>
-                            <span class="tech-badge">CQRS</span>
-                            <span class="tech-badge">MediatR</span>
-                            <span class="tech-badge">EF Core</span>
-                            <span class="tech-badge">Redis</span>
-                            <span class="tech-badge">Angular</span>
+
+                    <!-- 2. Arch & Cloud -->
+                    <div class="matrix-category-card">
+                        <div class="cat-header-icon c-cyan">
+                            <i class="fas fa-network-wired"></i>
                         </div>
-                        <div class="flex gap-2">
-                            <button class="flex-1 py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-green-500 hover:text-green-400 transition text-sm font-medium btn-enhanced magnetic view-details">
-                                <i class="fas fa-info-circle mr-1"></i> Details
-                            </button>
-                            <a href="https://github.com/Amr-shawky" target="_blank" class="px-4 py-2 text-center rounded-lg bg-green-900/40 text-green-300 border border-green-700/60 hover:bg-green-800/50 transition text-sm font-bold btn-enhanced magnetic">
+                        <h3>Arch & Cloud</h3>
+                        <div class="skills-pill-cloud">
+                            <span class="tech-tag-chip">Clean Arch</span>
+                            <span class="tech-tag-chip">CQRS & MediatR</span>
+                            <span class="tech-tag-chip">Vertical Slice</span>
+                            <span class="tech-tag-chip">Microservices</span>
+                            <span class="tech-tag-chip">Docker</span>
+                            <span class="tech-tag-chip">Azure Cloud</span>
+                            <span class="tech-tag-chip">YARP Gateway</span>
+                            <span class="tech-tag-chip">CI/CD Actions</span>
+                            <span class="tech-tag-chip">Polly</span>
+                        </div>
+                    </div>
+
+                    <!-- 3. Data & Messaging -->
+                    <div class="matrix-category-card">
+                        <div class="cat-header-icon c-green">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3>Data & Messaging</h3>
+                        <div class="skills-pill-cloud">
+                            <span class="tech-tag-chip">SQL Server</span>
+                            <span class="tech-tag-chip">PostgreSQL</span>
+                            <span class="tech-tag-chip">Redis (Caching)</span>
+                            <span class="tech-tag-chip">RabbitMQ</span>
+                            <span class="tech-tag-chip">MassTransit</span>
+                            <span class="tech-tag-chip">MongoDB</span>
+                            <span class="tech-tag-chip">gRPC</span>
+                        </div>
+                    </div>
+
+                    <!-- 4. Frontend & Quality -->
+                    <div class="matrix-category-card">
+                        <div class="cat-header-icon c-rose">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Frontend & Tools</h3>
+                        <div class="skills-pill-cloud">
+                            <span class="tech-tag-chip">Angular 18</span>
+                            <span class="tech-tag-chip">TypeScript</span>
+                            <span class="tech-tag-chip">Tailwind CSS</span>
+                            <span class="tech-tag-chip">RxJS</span>
+                            <span class="tech-tag-chip">xUnit / Moq</span>
+                            <span class="tech-tag-chip">Git / GitHub</span>
+                            <span class="tech-tag-chip">Postman</span>
+                            <span class="tech-tag-chip">Agile / Scrum</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Strip -->
+                <div class="stats-banner-wrap" id="statsCounterStrip">
+                    <div class="counter-column">
+                        <div class="counter-val-large" data-count="3">0</div>
+                        <div class="counter-title">Years Engineering</div>
+                    </div>
+                    <div class="counter-column">
+                        <div class="counter-val-large" data-count="16">0</div>
+                        <div class="counter-title">Projects Shipped</div>
+                    </div>
+                    <div class="counter-column">
+                        <div class="counter-val-large" data-count="6">0</div>
+                        <div class="counter-title">Ranked #6 LinkedIn 🇪🇬</div>
+                    </div>
+                    <div class="counter-column">
+                        <div class="counter-val-large" data-count="10">0</div>
+                        <div class="counter-title">Distributed Microservices</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FEATURED PROJECTS SECTION ==================== -->
+        <section id="projects" class="section-wrapper">
+            <div class="container-custom">
+                <div class="section-header-block center">
+                    <span class="section-tag"><i class="fas fa-layer-group"></i> Portfolio Gallery</span>
+                    <h2 class="section-heading">Featured <span class="text-gradient">Projects</span></h2>
+                    <p class="section-subtitle">
+                        Handcrafted enterprise platforms, distributed microservices, fintech payment engines, and reactive web apps.
+                    </p>
+                </div>
+
+                <!-- Filter Tabs -->
+                <div class="projects-filter-bar">
+                    <button class="filter-button-tab active" data-filter="all">All Projects</button>
+                    <button class="filter-button-tab" data-filter="fullstack">Full Stack</button>
+                    <button class="filter-button-tab" data-filter="backend">Backend & API</button>
+                    <button class="filter-button-tab" data-filter="microservices">Microservices</button>
+                    <button class="filter-button-tab" data-filter="frontend">Frontend</button>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="projects-showcase-grid" id="projectsShowcaseGrid">
+
+                    <!-- 1. PayOn - Graduation Project (Grade A+) -->
+                    <div class="showcase-card payon-spotlight" data-category="fullstack backend" data-project="payon">
+                        <div class="card-media-wrap">
+                            <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="PayOn Fintech Platform" loading="lazy">
+                            <div class="media-shade-layer"></div>
+                            <span class="media-corner-badge gold"><i class="fas fa-trophy text-yellow-300"></i> Grade A+ (Distinction)</span>
+                            <div class="card-heading-overlay">
+                                <h3>💳 PayOn Fintech Platform</h3>
+                                <span class="card-category-sub">Graduation Project · Financial Ecosystem</span>
+                            </div>
+                        </div>
+                        <div class="card-content-body">
+                            <p class="card-summary-text">
+                                Scalable multi-tenant digital banking, wallet, and settlement platform built with Clean Architecture, CQRS, MediatR, multi-currency processing, and automatic ledger reconciliation.
+                            </p>
+                            <div class="card-tags-flex">
+                                <span class="project-mini-tag accent">.NET 8</span>
+                                <span class="project-mini-tag emerald">Clean Arch</span>
+                                <span class="project-mini-tag">CQRS</span>
+                                <span class="project-mini-tag">MediatR</span>
+                                <span class="project-mini-tag">Redis</span>
+                                <span class="project-mini-tag">Angular</span>
+                            </div>
+                            <div class="card-buttons-pair">
+                                <button class="action-btn-pill view-project-btn" data-project="payon">
+                                    <i class="fas fa-info-circle"></i> Case Study
+                                </button>
+                                <a href="https://github.com/Amr-shawky" target="_blank" rel="noopener" class="action-btn-pill" aria-label="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Elevate Bootcamp Portal (Production Flagship) -->
+                    <div class="showcase-card elevate-spotlight" data-category="fullstack" data-project="elevate">
+                        <div class="card-media-wrap">
+                            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Elevate Bootcamp Portal" loading="lazy">
+                            <div class="media-shade-layer"></div>
+                            <span class="media-corner-badge live"><i class="fas fa-circle text-xs text-green-400 mr-1"></i> Production Live</span>
+                            <div class="card-heading-overlay">
+                                <h3>🚀 Elevate Bootcamp Portal</h3>
+                                <span class="card-category-sub">Production Full Stack Enterprise Platform</span>
+                            </div>
+                        </div>
+                        <div class="card-content-body">
+                            <p class="card-summary-text">
+                                Flagship full-stack training portal for Elevate Tech Company deployed on Hostinger & Azure. Manages live curriculum, student analytics, automated grading, and real-time SignalR notifications.
+                            </p>
+                            <div class="card-tags-flex">
+                                <span class="project-mini-tag accent">.NET 8 API</span>
+                                <span class="project-mini-tag">Angular 18</span>
+                                <span class="project-mini-tag">Azure</span>
+                                <span class="project-mini-tag">PostgreSQL</span>
+                                <span class="project-mini-tag">SignalR</span>
+                            </div>
+                            <div class="card-buttons-pair">
+                                <button class="action-btn-pill view-project-btn" data-project="elevate">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </button>
+                                <a href="https://portal.elevateegy.com/home" target="_blank" rel="noopener" class="action-btn-pill primary-link">
+                                    <i class="fas fa-globe"></i> Visit
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Flower E-Commerce Microservices -->
+                    <div class="showcase-card" data-category="microservices backend" data-project="flower">
+                        <div class="card-media-wrap">
+                            <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Flower Microservices" loading="lazy">
+                            <div class="media-shade-layer"></div>
+                            <div class="card-heading-overlay">
+                                <h3>🌸 Flower E-Commerce</h3>
+                                <span class="card-category-sub">10 Distributed Microservices</span>
+                            </div>
+                        </div>
+                        <div class="card-content-body">
+                            <p class="card-summary-text">
+                                Distributed platform with 10 independent microservices orchestrated via YARP Gateway, MassTransit RabbitMQ, high-speed gRPC, Polly resilience, and Docker containers.
+                            </p>
+                            <div class="card-tags-flex">
+                                <span class="project-mini-tag accent">.NET Core</span>
+                                <span class="project-mini-tag">YARP</span>
+                                <span class="project-mini-tag">MassTransit</span>
+                                <span class="project-mini-tag">RabbitMQ</span>
+                                <span class="project-mini-tag">gRPC</span>
+                                <span class="project-mini-tag">Docker</span>
+                            </div>
+                            <div class="card-buttons-pair">
+                                <button class="action-btn-pill view-project-btn" data-project="flower">
+                                    <i class="fas fa-info-circle"></i> Case Study
+                                </button>
+                                <a href="https://github.com/Elevate-Team-Project/Flower_ECommerce_Microservices" target="_blank" rel="noopener" class="action-btn-pill">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. TechZone E-Commerce API -->
+                    <div class="showcase-card" data-category="backend" data-project="techzone">
+                        <div class="card-media-wrap">
+                            <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="TechZone API" loading="lazy">
+                            <div class="media-shade-layer"></div>
+                            <div class="card-heading-overlay">
+                                <h3>⚡ TechZone E-Commerce API</h3>
+                                <span class="card-category-sub">Clean Architecture Engine</span>
+                            </div>
+                        </div>
+                        <div class="card-content-body">
+                            <p class="card-summary-text">
+                                Enterprise RESTful API built with ASP.NET Core and EF Core. Implements Specification & Repository patterns, Redis catalog caching, Stripe checkout, and Identity with JWT.
+                            </p>
+                            <div class="card-tags-flex">
+                                <span class="project-mini-tag accent">ASP.NET Core</span>
+                                <span class="project-mini-tag emerald">Specification Pattern</span>
+                                <span class="project-mini-tag">Redis Cache</span>
+                                <span class="project-mini-tag">Stripe</span>
+                            </div>
+                            <div class="card-buttons-pair">
+                                <button class="action-btn-pill view-project-btn" data-project="techzone">
+                                    <i class="fas fa-info-circle"></i> Case Study
+                                </button>
+                                <a href="https://github.com/Amr-shawky" target="_blank" rel="noopener" class="action-btn-pill">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Fitness Microservices -->
+                    <div class="showcase-card" data-category="microservices" data-project="fitness">
+                        <div class="card-media-wrap">
+                            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fitness Microservices" loading="lazy">
+                            <div class="media-shade-layer"></div>
+                            <div class="card-heading-overlay">
+                                <h3>🏋️ Fitness Microservices</h3>
+                                <span class="card-category-sub">Scalable Distributed System</span>
+                            </div>
+                        </div>
+                        <div class="card-content-body">
+                            <p class="card-summary-text">
+                                Decoupled fitness management platform splitting core logic into Identity, Workout, and Plan services communicating asynchronously over RabbitMQ with Ocelot Gateway.
+                            </p>
+                            <div class="card-tags-flex">
+                                <span class="project-mini-tag accent">.NET Core</span>
+                                <span class="project-mini-tag">RabbitMQ</span>
+                                <span class="project-mini-tag">Ocelot</span>
+                                <span class="project-mini-tag">CQRS</span>
+                                <span class="project-mini-tag">Docker</span>
+                            </div>
+                            <div class="card-buttons-pair">
+                                <button class="action-btn-pill view-project-btn" data-project="fitness">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </button>
+                                <a href="https://github.com/Elevate-Team-Project/Fitness_Microservices" target="_blank" rel="noopener" class="action-btn-pill">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Online Exam System -->
+                    <div class="showcase-card" data-category="backend" data-project="exam">
+                        <div class="card-media-wrap">
+                            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Online Exam System" loading="lazy">
+                            <div class="media-shade-layer"></div>
+                            <div class="card-heading-overlay">
+                                <h3>📝 Online Exam System</h3>
+                                <span class="card-category-sub">Assessment Platform</span>
+                            </div>
+                        </div>
+                        <div class="card-content-body">
+                            <p class="card-summary-text">
+                                Backend platform managing online examinations with automated scoring algorithms, dynamic question banks, analytics dashboard, and Vertical Slice Architecture.
+                            </p>
+                            <div class="card-tags-flex">
+                                <span class="project-mini-tag accent">.NET Web API</span>
+                                <span class="project-mini-tag emerald">Vertical Slice</span>
+                                <span class="project-mini-tag">CQRS</span>
+                                <span class="project-mini-tag">SQL Server</span>
+                            </div>
+                            <div class="card-buttons-pair">
+                                <button class="action-btn-pill view-project-btn" data-project="exam">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </button>
+                                <a href="https://github.com/Elevate-Bootcamp/OnlineExam" target="_blank" rel="noopener" class="action-btn-pill">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. Educational System API -->
+                    <div class="showcase-card" data-category="backend" data-project="lms">
+                        <div class="card-media-wrap">
+                            <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="LMS System" loading="lazy">
+                            <div class="media-shade-layer"></div>
+                            <div class="card-heading-overlay">
+                                <h3>🎓 Educational System API</h3>
+                                <span class="card-category-sub">LMS Backend Engine</span>
+                            </div>
+                        </div>
+                        <div class="card-content-body">
+                            <p class="card-summary-text">
+                                Robust LMS engine supporting curriculum management, student enrollment workflows, quiz engines, progress metrics, and instructor collaborative workspaces.
+                            </p>
+                            <div class="card-tags-flex">
+                                <span class="project-mini-tag accent">.NET Core API</span>
+                                <span class="project-mini-tag">EF Core</span>
+                                <span class="project-mini-tag">LINQ</span>
+                                <span class="project-mini-tag">JWT</span>
+                            </div>
+                            <div class="card-buttons-pair">
+                                <button class="action-btn-pill view-project-btn" data-project="lms">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </button>
+                                <a href="https://github.com/AspAlliance/Educational_System" target="_blank" rel="noopener" class="action-btn-pill">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. FreshCart -->
+                    <div class="showcase-card" data-category="frontend" data-project="freshcart">
+                        <div class="card-media-wrap">
+                            <img src="https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="FreshCart Ecommerce" loading="lazy">
+                            <div class="media-shade-layer"></div>
+                            <div class="card-heading-overlay">
+                                <h3>🛒 FreshCart</h3>
+                                <span class="card-category-sub">E-Commerce Web Application</span>
+                            </div>
+                        </div>
+                        <div class="card-content-body">
+                            <p class="card-summary-text">
+                                Modern e-commerce web application featuring live cart updates, secure checkout, multi-parameter filtering, and responsive animated interfaces.
+                            </p>
+                            <div class="card-tags-flex">
+                                <span class="project-mini-tag accent">Angular 18</span>
+                                <span class="project-mini-tag">TypeScript</span>
+                                <span class="project-mini-tag">Tailwind CSS</span>
+                                <span class="project-mini-tag">RxJS</span>
+                            </div>
+                            <div class="card-buttons-pair">
+                                <button class="action-btn-pill view-project-btn" data-project="freshcart">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </button>
+                                <a href="https://github.com/Amr-shawky/e-commerce" target="_blank" rel="noopener" class="action-btn-pill">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 9. Event Management System -->
+                    <div class="showcase-card" data-category="backend" data-project="events">
+                        <div class="card-media-wrap">
+                            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Event Management" loading="lazy">
+                            <div class="media-shade-layer"></div>
+                            <div class="card-heading-overlay">
+                                <h3>🎟️ Event Management System</h3>
+                                <span class="card-category-sub">Ticketing & QR Check-in</span>
+                            </div>
+                        </div>
+                        <div class="card-content-body">
+                            <p class="card-summary-text">
+                                Comprehensive event organization engine with role-based access control, ticket booking pipelines, QR code validation, and administrative moderation tools.
+                            </p>
+                            <div class="card-tags-flex">
+                                <span class="project-mini-tag accent">.NET Core API</span>
+                                <span class="project-mini-tag">EF Core</span>
+                                <span class="project-mini-tag">SQL Server</span>
+                                <span class="project-mini-tag">QR Code</span>
+                            </div>
+                            <div class="card-buttons-pair">
+                                <button class="action-btn-pill view-project-btn" data-project="events">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </button>
+                                <a href="https://github.com/EGDevNinjas/EventManagementSystem" target="_blank" rel="noopener" class="action-btn-pill">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 10. Novira -->
+                    <div class="showcase-card" data-category="frontend" data-project="novira">
+                        <div class="card-media-wrap">
+                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Novira E-learning" loading="lazy">
+                            <div class="media-shade-layer"></div>
+                            <div class="card-heading-overlay">
+                                <h3>📱 Novira</h3>
+                                <span class="card-category-sub">E-Learning UI Platform</span>
+                            </div>
+                        </div>
+                        <div class="card-content-body">
+                            <p class="card-summary-text">
+                                Interactive e-learning portal frontend built with Angular and Material Design. Students can search courses, view progress curricula, and track enrollments.
+                            </p>
+                            <div class="card-tags-flex">
+                                <span class="project-mini-tag accent">Angular</span>
+                                <span class="project-mini-tag">Material</span>
+                                <span class="project-mini-tag">TypeScript</span>
+                            </div>
+                            <div class="card-buttons-pair">
+                                <button class="action-btn-pill view-project-btn" data-project="novira">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </button>
+                                <a href="https://github.com/Amr-shawky/Novira" target="_blank" rel="noopener" class="action-btn-pill">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 11. BStore -->
+                    <div class="showcase-card" data-category="backend" data-project="bstore">
+                        <div class="card-media-wrap">
+                            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="BStore" loading="lazy">
+                            <div class="media-shade-layer"></div>
+                            <div class="card-heading-overlay">
+                                <h3>📚 BStore (Book Store)</h3>
+                                <span class="card-category-sub">ASP.NET MVC Platform</span>
+                            </div>
+                        </div>
+                        <div class="card-content-body">
+                            <p class="card-summary-text">
+                                Full-featured book catalog platform with shopping cart, wishlist, secure checkout, inventory controls, and full administrative dashboard.
+                            </p>
+                            <div class="card-tags-flex">
+                                <span class="project-mini-tag accent">ASP.NET MVC</span>
+                                <span class="project-mini-tag">EF Core</span>
+                                <span class="project-mini-tag">SQL Server</span>
+                            </div>
+                            <div class="card-buttons-pair">
+                                <button class="action-btn-pill view-project-btn" data-project="bstore">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </button>
+                                <a href="https://github.com/Amr-shawky/BStore" target="_blank" rel="noopener" class="action-btn-pill">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Mini Projects Creative Vault -->
+                <div class="mini-vault-block">
+                    <h3 class="mini-vault-heading">Frontend & Creative Tools Collection</h3>
+                    <div class="mini-vault-links">
+                        <a href="https://github.com/Amr-shawky/GameGate" target="_blank" rel="noopener" class="vault-link-item">🎮 GameGate</a>
+                        <a href="https://github.com/Amr-shawky/RegexCraft" target="_blank" rel="noopener" class="vault-link-item">🔍 RegexCraft</a>
+                        <a href="https://github.com/Amr-shawky/Bookmarker" target="_blank" rel="noopener" class="vault-link-item">🔖 Bookmarker</a>
+                        <a href="https://github.com/Amr-shawky/Mealify" target="_blank" rel="noopener" class="vault-link-item">🍽️ Mealify</a>
+                        <a href="https://github.com/Amr-shawky/WeatherCore" target="_blank" rel="noopener" class="vault-link-item">☁️ WeatherCore</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== CONTACT SECTION ==================== -->
+        <section id="contact" class="section-wrapper surface-bg">
+            <div class="container-custom">
+                <div class="contact-layout-split">
+                    <!-- Left: Direct Info -->
+                    <div class="contact-direct-info">
+                        <span class="section-tag"><i class="fas fa-paper-plane"></i> Get In Touch</span>
+                        <h3>Let's Build Something <span class="text-gradient">Exceptional</span></h3>
+                        <p>
+                            Available for high-impact backend engineering, distributed system design, enterprise consultancy, and technical mentorship. Feel free to reach out directly.
+                        </p>
+
+                        <div class="contact-channels-column">
+                            <a href="mailto:amrshawky936@gmail.com" class="contact-channel-card">
+                                <div class="channel-icon-square">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <div class="channel-data-label">Email</div>
+                                    <div class="channel-data-val">amrshawky936@gmail.com</div>
+                                </div>
+                            </a>
+
+                            <a href="tel:+201025518153" class="contact-channel-card">
+                                <div class="channel-icon-square">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <div class="channel-data-label">Phone & WhatsApp</div>
+                                    <div class="channel-data-val">+20 1025518153</div>
+                                </div>
+                            </a>
+
+                            <div class="contact-channel-card">
+                                <div class="channel-icon-square">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <div class="channel-data-label">Location</div>
+                                    <div class="channel-data-val">Cairo, Badr City, Egypt 🇪🇬</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hero-social-list">
+                            <a href="https://www.linkedin.com/in/3mrshawky/" target="_blank" rel="noopener" class="social-pill-btn linkedin" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://github.com/Amr-shawky" target="_blank" rel="noopener" class="social-pill-btn github" aria-label="GitHub">
                                 <i class="fab fa-github"></i>
                             </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. Flower E-Commerce -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="microservices backend" data-project="flower">
-                    <div class="h-48 bg-gray-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Flower E-Commerce" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">🌸 Flower E-Commerce</h3>
-                            <span class="text-xs text-gray-300">Enterprise Microservices Platform</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col">
-                        <p class="text-gray-400 text-sm mb-4 flex-1">Distributed e-commerce platform with 10 microservices orchestrated via YARP Gateway, MassTransit RabbitMQ, gRPC inter-service communication, and Polly resilience.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="tech-badge border-dotnet text-dotnet">.NET Core</span>
-                            <span class="tech-badge">YARP Gateway</span>
-                            <span class="tech-badge">MassTransit</span>
-                            <span class="tech-badge">RabbitMQ</span>
-                            <span class="tech-badge">gRPC</span>
-                            <span class="tech-badge">Polly</span>
-                            <span class="tech-badge">Docker</span>
-                            <span class="tech-badge">Stripe</span>
-                        </div>
-                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
-                            <i class="fas fa-info-circle mr-1"></i> View Details
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 2. Fitness Microservices -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="microservices" data-project="fitness">
-                    <div class="h-48 bg-gray-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fitness" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">Fitness Microservices</h3>
-                            <span class="text-xs text-gray-300">Scalable Distributed System</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col">
-                        <p class="text-gray-400 text-sm mb-4 flex-1">Scalable system decoupling logic into Identity, Workout, and Plan services using RabbitMQ for async communication.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="tech-badge border-dotnet text-dotnet">.NET Core</span>
-                            <span class="tech-badge">RabbitMQ</span>
-                            <span class="tech-badge">Ocelot</span>
-                            <span class="tech-badge">CQRS</span>
-                            <span class="tech-badge">Docker</span>
-                        </div>
-                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
-                            <i class="fas fa-info-circle mr-1"></i> View Details
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 3. Online Exam System -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="backend" data-project="exam">
-                    <div class="h-48 bg-gray-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Exam" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">Online Exam System</h3>
-                            <span class="text-xs text-gray-300">Advanced Assessment Platform</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col">
-                        <p class="text-gray-400 text-sm mb-4 flex-1">Backend platform for managing online exams with question banks, scoring, and admin analytics dashboard.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="tech-badge border-dotnet text-dotnet">.NET Web API</span>
-                            <span class="tech-badge">CQRS</span>
-                            <span class="tech-badge">Vertical Slice</span>
-                            <span class="tech-badge">SQL</span>
-                        </div>
-                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
-                            <i class="fas fa-info-circle mr-1"></i> View Details
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 5. TechZone E-Commerce Backend -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="backend" data-project="techzone">
-                    <div class="h-48 bg-gray-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="TechZone API" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">⚡ TechZone E-Commerce API</h3>
-                            <span class="text-xs text-gray-300">Clean Architecture Backend</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col">
-                        <p class="text-gray-400 text-sm mb-4 flex-1">High-performance e-commerce backend engine implementing Repository & Specification patterns, Redis caching, Stripe checkout, and ASP.NET Core Identity with JWT.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="tech-badge border-dotnet text-dotnet">ASP.NET Core</span>
-                            <span class="tech-badge">Specification Pattern</span>
-                            <span class="tech-badge">Redis Cache</span>
-                            <span class="tech-badge">Stripe</span>
-                            <span class="tech-badge">JWT Identity</span>
-                        </div>
-                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
-                            <i class="fas fa-info-circle mr-1"></i> View Details
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 4. Educational System API -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="backend" data-project="lms">
-                    <div class="h-48 bg-gray-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="LMS" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">Educational System API</h3>
-                            <span class="text-xs text-gray-300">Comprehensive LMS Backend</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col">
-                        <p class="text-gray-400 text-sm mb-4 flex-1">A Backend system for managing courses, enrollments, assessments, progress tracking, payments, and instructor collaboration.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="tech-badge border-dotnet text-dotnet">.NET Core API</span>
-                            <span class="tech-badge">EF Core</span>
-                            <span class="tech-badge">LINQ</span>
-                            <span class="tech-badge">JWT</span>
-                        </div>
-                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
-                            <i class="fas fa-info-circle mr-1"></i> View Details
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 5. Book Store -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="backend" data-project="bstore">
-                    <div class="h-48 bg-gray-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Book Store" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">BStore (Book Store)</h3>
-                            <span class="text-xs text-gray-300">MVC Platform</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col">
-                        <p class="text-gray-400 text-sm mb-4 flex-1">An easy-to-use platform to buy and manage books. Features cart, wishlist, checkout, and full admin dashboard.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="tech-badge border-dotnet text-dotnet">ASP.NET MVC</span>
-                            <span class="tech-badge">EF Core</span>
-                            <span class="tech-badge">SQL Server</span>
-                            <span class="tech-badge">Bootstrap</span>
-                        </div>
-                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
-                            <i class="fas fa-info-circle mr-1"></i> View Details
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 6. FreshCart -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="frontend" data-project="freshcart">
-                    <div class="h-48 bg-gray-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ecommerce" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">FreshCart</h3>
-                            <span class="text-xs text-gray-300">E-Commerce Web App</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col">
-                        <p class="text-gray-400 text-sm mb-4 flex-1">E-commerce app for browsing products and managing orders. Includes secure checkout and responsive UI with smooth animations.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="tech-badge border-red-500 text-red-400">Angular</span>
-                            <span class="tech-badge">TypeScript</span>
-                            <span class="tech-badge">Tailwind CSS</span>
-                        </div>
-                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
-                            <i class="fas fa-info-circle mr-1"></i> View Details
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 7. Event Management System -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="backend" data-project="events">
-                    <div class="h-48 bg-gray-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Events" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">Event System</h3>
-                            <span class="text-xs text-gray-300">Management Platform</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col">
-                        <p class="text-gray-400 text-sm mb-4 flex-1">Platform for event organization, role-based access, ticket booking with QR check-in, and admin moderation.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="tech-badge border-dotnet text-dotnet">.NET Core API</span>
-                            <span class="tech-badge">EF Core</span>
-                            <span class="tech-badge">SQL</span>
-                            <span class="tech-badge">JWT</span>
-                        </div>
-                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
-                            <i class="fas fa-info-circle mr-1"></i> View Details
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 8. Novira -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border border-gray-800 flex flex-col h-full group tilt-card cursor-pointer" data-category="frontend" data-project="novira">
-                    <div class="h-48 bg-gray-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Novira" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute bottom-4 left-4 z-20">
-                            <h3 class="text-xl font-bold text-white">Novira</h3>
-                            <span class="text-xs text-gray-300">E-learning UI</span>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col">
-                        <p class="text-gray-400 text-sm mb-4 flex-1">A modern E-learning platform frontend for students to browse and enroll in courses with an interactive UI.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="tech-badge border-red-500 text-red-400">Angular</span>
-                            <span class="tech-badge">Material</span>
-                            <span class="tech-badge">Bootstrap</span>
-                        </div>
-                        <button class="w-full py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
-                            <i class="fas fa-info-circle mr-1"></i> View Details
-                        </button>
-                    </div>
-                </div>
-                <!-- 9. ELEVATE BOOTCAMP - SPECIAL FULL STACK PROJECT -->
-                <div class="project-item glow-box bg-cardDark rounded-xl overflow-hidden border-2 border-dotnet/30 flex flex-col h-full group tilt-card cursor-pointer hover:border-dotnet transition-all" data-category="fullstack" data-project="elevate">
-                    <div class="h-48 bg-gradient-to-br from-dotnet/20 to-secondary/10 relative overflow-hidden flex items-center justify-center">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                        <div class="text-center z-20">
-                            <div class="text-5xl mb-2">🚀</div>
-                            <h3 class="text-xl font-bold text-white">Elevate Bootcamp Portal</h3>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col">
-                        <p class="text-gray-400 text-sm mb-4 flex-1">Production full-stack training platform for Elevate Tech Company deployed on Hostinger & Azure. Manages curriculum, student progress, assignments, live sessions, and mentoring with real-time notifications and analytics.</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="tech-badge border-dotnet text-dotnet">.NET 8</span>
-                            <span class="tech-badge border-accent text-accent">Angular 18</span>
-                            <span class="tech-badge border-purple-500 text-purple-300">Hostinger</span>
-                            <span class="tech-badge">Azure</span>
-                            <span class="tech-badge">PostgreSQL</span>
-                            <span class="tech-badge">Redis</span>
-                            <span class="tech-badge">SignalR</span>
-                        </div>
-                        <div class="flex gap-2">
-                            <button class="flex-1 py-2 text-center rounded-lg bg-gray-800 border border-gray-600 hover:border-dotnet hover:text-dotnet transition text-sm font-medium btn-enhanced magnetic view-details">
-                                <i class="fas fa-info-circle mr-1"></i> Details
-                            </button>
-                            <a href="https://portal.elevateegy.com/home" target="_blank" class="flex-1 py-2 text-center rounded-lg bg-gradient-to-r from-dotnet to-secondary text-white border border-dotnet/50 hover:opacity-90 transition text-sm font-bold btn-enhanced magnetic">
-                                <i class="fas fa-globe mr-1"></i> Visit
+                            <a href="https://www.youtube.com/@Eng_Amr" target="_blank" rel="noopener" class="social-pill-btn youtube" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
                             </a>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Mini Projects -->
-            <div class="mt-20 border-t border-gray-800 pt-10 reveal-up">
-                <h3 class="text-2xl font-bold mb-8 text-center text-gray-300">Frontend <span class="text-primary">Creative Collection</span></h3>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="https://github.com/Amr-shawky/GameGate" class="px-5 py-2 border border-gray-700 rounded-full hover:bg-cardDark text-sm text-gray-300 transition hover:border-primary hover:text-white btn-enhanced magnetic">🎮 GameGate</a>
-                    <a href="https://github.com/Amr-shawky/RegexCraft" class="px-5 py-2 border border-gray-700 rounded-full hover:bg-cardDark text-sm text-gray-300 transition hover:border-primary hover:text-white btn-enhanced magnetic">🔍 RegexCraft</a>
-                    <a href="https://github.com/Amr-shawky/Bookmarker" class="px-5 py-2 border border-gray-700 rounded-full hover:bg-cardDark text-sm text-gray-300 transition hover:border-primary hover:text-white btn-enhanced magnetic">🔖 Bookmarker</a>
-                    <a href="https://github.com/Amr-shawky/Mealify" class="px-5 py-2 border border-gray-700 rounded-full hover:bg-cardDark text-sm text-gray-300 transition hover:border-primary hover:text-white btn-enhanced magnetic">🍽️ Mealify</a>
-                    <a href="https://github.com/Amr-shawky/WeatherCore" class="px-5 py-2 border border-gray-700 rounded-full hover:bg-cardDark text-sm text-gray-300 transition hover:border-primary hover:text-white btn-enhanced magnetic">☁️ WeatherCore</a>
-                </div>
-            </div>
-        </div>
-    </section>
+                    <!-- Right: Form -->
+                    <div class="contact-form-box">
+                        <form id="contactForm" novalidate>
+                            <div class="form-split-row">
+                                <div class="form-field-group">
+                                    <label for="formName" class="form-field-label">Your Name</label>
+                                    <input type="text" id="formName" name="name" class="form-field-control" placeholder="e.g. John Doe" required>
+                                    <span class="form-err-msg" id="nameError"></span>
+                                </div>
+                                <div class="form-field-group">
+                                    <label for="formEmail" class="form-field-label">Your Email</label>
+                                    <input type="email" id="formEmail" name="email" class="form-field-control" placeholder="name@example.com" required>
+                                    <span class="form-err-msg" id="emailError"></span>
+                                </div>
+                            </div>
 
-    <!-- ==================== CONTACT SECTION ==================== -->
-    <section id="contact" class="py-20 relative section-reveal">
-        <div class="container mx-auto px-6 max-w-3xl">
-            <h2 class="text-4xl font-bold text-center mb-12 section-title">Get In <span class="text-gradient">Touch</span></h2>
+                            <div class="form-field-group">
+                                <label for="formSubject" class="form-field-label">Subject</label>
+                                <input type="text" id="formSubject" name="subject" class="form-field-control" placeholder="Project Opportunity or Collaboration">
+                            </div>
 
-            <!-- Contact Info Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 reveal-up">
-                <a href="mailto:amrshawky936@gmail.com" class="glass-card p-4 rounded-xl flex items-center gap-3 hover:border-dotnet transition group">
-                    <div class="w-10 h-10 rounded-lg bg-dotnet/20 text-dotnet flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="overflow-hidden">
-                        <div class="text-xs text-gray-400">Email</div>
-                        <div class="text-sm font-semibold text-white truncate">amrshawky936@gmail.com</div>
-                    </div>
-                </a>
-                <a href="tel:+201025518153" class="glass-card p-4 rounded-xl flex items-center gap-3 hover:border-secondary transition group">
-                    <div class="w-10 h-10 rounded-lg bg-secondary/20 text-secondary flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition">
-                        <i class="fas fa-phone-alt"></i>
-                    </div>
-                    <div>
-                        <div class="text-xs text-gray-400">Phone</div>
-                        <div class="text-sm font-semibold text-white">+20 1025518153</div>
-                    </div>
-                </a>
-                <div class="glass-card p-4 rounded-xl flex items-center gap-3 border border-gray-800">
-                    <div class="w-10 h-10 rounded-lg bg-accent/20 text-accent flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div>
-                        <div class="text-xs text-gray-400">Location</div>
-                        <div class="text-sm font-semibold text-white">Cairo, Badr City 🇪🇬</div>
+                            <div class="form-field-group">
+                                <label for="formMessage" class="form-field-label">Your Message</label>
+                                <textarea id="formMessage" name="message" class="form-field-control" placeholder="Write your message here..." required></textarea>
+                                <span class="form-err-msg" id="messageError"></span>
+                            </div>
+
+                            <button type="submit" id="formSubmitBtn" class="form-send-btn">
+                                <span id="btnLabel">Send Message <i class="fas fa-paper-plane ml-2"></i></span>
+                                <span id="btnSpinner" style="display: none;"><i class="fas fa-spinner fa-spin mr-2"></i> Sending...</span>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
-            
-            <div class="glass-card p-8 rounded-2xl reveal-scale">
-                <form id="contactForm" novalidate>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div class="floating-label-group">
-                            <input type="text" id="name" name="name" class="floating-input" placeholder=" " required>
-                            <label for="name" class="floating-label">Your Name</label>
-                            <span class="input-error" id="nameError"></span>
-                        </div>
-                        <div class="floating-label-group">
-                            <input type="email" id="email" name="email" class="floating-input" placeholder=" " required>
-                            <label for="email" class="floating-label">Your Email</label>
-                            <span class="input-error" id="emailError"></span>
-                        </div>
-                    </div>
-                    <div class="floating-label-group mb-6">
-                        <input type="text" id="subject" name="subject" class="floating-input" placeholder=" ">
-                        <label for="subject" class="floating-label">Subject (Optional)</label>
-                    </div>
-                    <div class="floating-label-group mb-6">
-                        <textarea id="message" name="message" rows="4" class="floating-input floating-textarea" placeholder=" " required></textarea>
-                        <label for="message" class="floating-label">Your Message</label>
-                        <span class="input-error" id="messageError"></span>
-                    </div>
-                    <button type="submit" id="submitBtn" class="w-full py-4 px-6 rounded-lg bg-gradient-to-r from-dotnet to-secondary text-white font-bold hover:opacity-90 transition transform hover:scale-[1.02] btn-enhanced ripple magnetic neon-glow-pulse">
-                        <span id="submitText">Send Message <i class="fas fa-paper-plane ml-2"></i></span>
-                        <span id="submitLoading" class="hidden"><i class="fas fa-spinner fa-spin mr-2"></i> Sending...</span>
-                    </button>
-                </form>
+        </section>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="container-custom">
+            <div class="footer-inner-content">
+                <div class="footer-brand-title">Amr Shawky <span>.NET Engineer</span></div>
+                <p class="footer-copy-text">
+                    &copy; <span id="currentYear"></span> Amr Mohamed Shawky. Engineered with Clean Architecture & Passion.
+                </p>
             </div>
-
-            <div class="flex justify-center gap-8 mt-12 reveal-up">
-                <a href="https://github.com/Amr-shawky" target="_blank" class="text-gray-400 hover:text-white transition text-3xl magnetic social-icon"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/3mrshawky/" target="_blank" class="text-gray-400 hover:text-blue-600 transition text-3xl magnetic social-icon"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.youtube.com/@Eng_Amr" target="_blank" class="text-gray-400 hover:text-red-500 transition text-3xl magnetic social-icon"><i class="fab fa-youtube"></i></a>
-                <a href="mailto:amrshawky936@gmail.com" class="text-gray-400 hover:text-purple-400 transition text-3xl magnetic social-icon"><i class="fas fa-envelope"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Toast Notification -->
-    <div id="toast" class="toast">
-        <div class="toast-icon"><i class="fas fa-check-circle"></i></div>
-        <div class="toast-content">
-            <h4 class="toast-title">Success!</h4>
-            <p class="toast-message">Your message has been sent successfully.</p>
-        </div>
-        <button class="toast-close" onclick="hideToast()"><i class="fas fa-times"></i></button>
-    </div>
-
-    <!-- ==================== FOOTER ==================== -->
-    <footer class="bg-black py-8 border-t border-gray-900">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-gray-500 text-sm">
-                Designed & Built by <span class="text-dotnet font-semibold">Amr Shawky</span>. All rights reserved.
-            </p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="toast-notice">
+        <div class="toast-icon-side"><i class="fas fa-check-circle"></i></div>
+        <div>
+            <div class="toast-body-title">Message Sent!</div>
+            <div class="toast-body-msg">Thank you for reaching out. I will get back to you shortly.</div>
+        </div>
+        <button class="toast-btn-close" id="toastCloseBtn" aria-label="Close Toast">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
 
     <!-- ==================== PROJECT DETAILS MODAL ==================== -->
-    <div id="projectModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9999] hidden flex items-center justify-center p-2">
-        <div class="bg-cardDark border border-gray-700 rounded-2xl max-w-7xl w-full max-h-[95vh] overflow-y-auto animate-fade-in shadow-2xl relative">
-            <!-- Close Button -->
-            <button onclick="closeProjectModal()" class="fixed top-10 right-10 z-[10000] text-gray-400 hover:text-white transition text-2xl bg-black/50 rounded-full p-2 w-10 h-10 flex items-center justify-center">
+    <div id="projectModalOverlay" class="custom-modal-overlay">
+        <div class="custom-modal-dialog" id="projectModalDialog">
+            <button class="modal-close-cross" id="modalCloseBtn" aria-label="Close modal">
                 <i class="fas fa-times"></i>
             </button>
-
-            <!-- Modal Content -->
-            <div id="modalContent"></div>
+            <div id="modalDynamicBody"></div>
         </div>
     </div>
 
-    <!-- Projects Data (Hidden) -->
+    <!-- Projects Data Object -->
     <script>
         const projectsData = {
             payon: {
                 title: '💳 PayOn Fintech Platform',
                 subtitle: 'Graduation Project · Grade A+ (Distinction)',
-                description: 'A scalable multi-tenant digital banking, wallet, and financial settlement platform engineered with Clean Architecture, CQRS, and Event-Driven patterns. Honored with Grade A+ (Distinction) as a graduation project.',
+                description: 'A scalable multi-tenant digital banking, wallet, and financial settlement platform engineered with Clean Architecture, CQRS, and Event-Driven patterns. Honored with Grade A+ (Distinction) as a graduation project from Benha University.',
                 image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                 technologies: ['.NET 8', 'Clean Architecture', 'CQRS & MediatR', 'EF Core', 'Redis Caching', 'SQL Server', 'Angular 18', 'JWT & Identity', 'Stripe & PayPal'],
                 features: [
@@ -935,24 +1042,27 @@
                 details: 'PayOn was engineered as an enterprise-grade fintech solution designed to solve multi-tenant financial transaction workflows. The backend follows strict Clean Architecture boundaries with Domain-Driven Design (DDD), decoupling core business logic from database and presentation layers. CQRS ensures optimal throughput by segregating queries from mutation commands, while Redis eliminates database bottlenecks on high-frequency account balance queries. The project was evaluated with the highest academic grade: Grade A+ (Distinction).',
                 github: 'https://github.com/Amr-shawky'
             },
-            techzone: {
-                title: '⚡ TechZone E-Commerce API',
-                subtitle: 'Clean Architecture Enterprise Engine',
-                description: 'A production-grade e-commerce RESTful API built with ASP.NET Core, EF Core, and modern enterprise design patterns including Repository, Unit of Work, and Specification patterns.',
-                image: 'https://images.unsplash.com/photo-1556742044-3c52d6e88c62?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                technologies: ['ASP.NET Core', 'Clean Architecture', 'Specification Pattern', 'Repository Pattern', 'Redis Caching', 'Stripe API', 'ASP.NET Core Identity', 'SQL Server'],
+            elevate: {
+                title: '🚀 Elevate Bootcamp Portal',
+                subtitle: 'Full Stack Training Platform · Live in Production',
+                description: 'A comprehensive full-stack training portal developed for Elevate Tech Company. Production-deployed system managing bootcamp curriculum, student progress, assignments, live sessions, and mentoring.',
+                image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                technologies: ['.NET 8 API', 'Angular 18', 'Azure Cloud', 'PostgreSQL', 'Redis', 'SignalR', 'Docker', 'CI/CD'],
                 features: [
-                    'Specification Pattern for Dynamic Search, Sort & Filtering',
-                    'Generic Repository & Unit of Work Design Patterns',
-                    'Redis Distributed In-Memory Cache for Product Catalogs',
-                    'Stripe Payment Intent API & Webhook Processing',
-                    'Secure Identity Management with JWT Tokens & Refresh Flow',
-                    'Order Processing Pipeline with Inventory Reservation',
-                    'Swagger/OpenAPI Documentation with Bearer Auth',
-                    'Global Custom Exception Handling Middleware'
+                    'Student & Instructor Dashboard with Real-time Analytics',
+                    'Live Class Scheduling & Real-time Communication',
+                    'Assignment Management & Automated Grading',
+                    'Certificate Generation & Verification',
+                    'Progress Tracking & Performance Reports',
+                    'Payment Integration & Billing System',
+                    'Video Streaming Integration',
+                    'Real-time Notifications with SignalR',
+                    'Advanced Search & Filtering',
+                    'Comprehensive Admin Controls'
                 ],
-                details: 'TechZone showcases pure clean architecture and maintainable software engineering for high-volume retail. By employing the Specification Pattern, business query logic remains strongly typed, reusable, and decoupled from Entity Framework Core query generation. Distributed Redis caching provides sub-millisecond responses on frequently queried product catalogs, while Stripe ensures secure payment execution.',
-                github: 'https://github.com/Amr-shawky'
+                details: 'My flagship full-stack project deployed in production for Elevate Tech Company. This system serves real students and instructors, featuring real-time communication with SignalR, advanced analytics, automated grading systems, and certificate generation. Built with .NET 8 for a robust backend and Angular 18 for a modern frontend, deployed on Azure with PostgreSQL and Redis for optimal performance.',
+                github: 'https://portal.elevateegy.com/home',
+                isLive: true
             },
             flower: {
                 title: '🌸 Flower E-Commerce',
@@ -973,6 +1083,25 @@
                 ],
                 details: 'This project demonstrates advanced microservices architecture with 10 independent services, each responsible for a specific business domain. The system uses MassTransit and RabbitMQ for asynchronous event-driven communication between services, ensuring resilience, scalability, and loose coupling. YARP functions as the reverse proxy gateway, while Polly handles transient faults with circuit breakers and retries.',
                 github: 'https://github.com/Elevate-Team-Project/Flower_ECommerce_Microservices'
+            },
+            techzone: {
+                title: '⚡ TechZone E-Commerce API',
+                subtitle: 'Clean Architecture Enterprise Engine',
+                description: 'A production-grade e-commerce RESTful API built with ASP.NET Core, EF Core, and modern enterprise design patterns including Repository, Unit of Work, and Specification patterns.',
+                image: 'https://images.unsplash.com/photo-1556742044-3c52d6e88c62?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                technologies: ['ASP.NET Core', 'Clean Architecture', 'Specification Pattern', 'Repository Pattern', 'Redis Caching', 'Stripe API', 'ASP.NET Core Identity', 'SQL Server'],
+                features: [
+                    'Specification Pattern for Dynamic Search, Sort & Filtering',
+                    'Generic Repository & Unit of Work Design Patterns',
+                    'Redis Distributed In-Memory Cache for Product Catalogs',
+                    'Stripe Payment Intent API & Webhook Processing',
+                    'Secure Identity Management with JWT Tokens & Refresh Flow',
+                    'Order Processing Pipeline with Inventory Reservation',
+                    'Swagger/OpenAPI Documentation with Bearer Auth',
+                    'Global Custom Exception Handling Middleware'
+                ],
+                details: 'TechZone showcases pure clean architecture and maintainable software engineering for high-volume retail. By employing the Specification Pattern, business query logic remains strongly typed, reusable, and decoupled from Entity Framework Core query generation. Distributed Redis caching provides sub-millisecond responses on frequently queried product catalogs, while Stripe ensures secure payment execution.',
+                github: 'https://github.com/Amr-shawky'
             },
             fitness: {
                 title: 'Fitness Microservices',
@@ -1105,31 +1234,11 @@
                 ],
                 details: 'A beautiful e-learning platform frontend built with Angular using Material Design components. Features an intuitive course catalog, search functionality, and responsive design for all devices.',
                 github: 'https://github.com/Amr-shawky/Novira'
-            },
-            elevate: {
-                title: '🚀 Elevate Bootcamp Portal',
-                subtitle: 'Full Stack Training Platform',
-                description: 'A comprehensive full-stack training portal developed for Elevate Tech Company. Production-deployed system managing bootcamp curriculum, student progress, assignments, live sessions, and mentoring.',
-                image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                technologies: ['.NET 8 API', 'Angular 18', 'Azure Cloud', 'PostgreSQL', 'Redis', 'SignalR', 'Docker', 'CI/CD'],
-                features: [
-                    'Student & Instructor Dashboard with Real-time Analytics',
-                    'Live Class Scheduling & Real-time Communication',
-                    'Assignment Management & Automated Grading',
-                    'Certificate Generation & Verification',
-                    'Progress Tracking & Performance Reports',
-                    'Payment Integration & Billing System',
-                    'Video Streaming Integration',
-                    'Real-time Notifications with SignalR',
-                    'Advanced Search & Filtering',
-                    'Comprehensive Admin Controls'
-                ],
-                details: 'My flagship full-stack project deployed in production for Elevate Tech Company. This system serves real students and instructors, featuring real-time communication with SignalR, advanced analytics, automated grading systems, and certificate generation. Built with .NET 8 for a robust backend and Angular 18 for a modern frontend, deployed on Azure with PostgreSQL and Redis for optimal performance.',
-                github: 'https://portal.elevateegy.com/home',
-                isLive: true
             }
         };
     </script>
 
+    <!-- Main Logic Script -->
+    <script src="script.js"></script>
 </body>
 </html>
