@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initPreloader();
     initHeroScene();
     initCardTilt();
+    initArchitectureMotion();
+    initArchitectureInteraction();
+    initSceneSpotlight();
     initScrollProgress();
     initNavbar();
     initBackToTop();
@@ -224,6 +227,148 @@ function initCardTilt() {
             card.style.setProperty('--card-tilt-y', '0deg');
         }, { passive: true });
     });
+}
+
+function initArchitectureMotion() {
+    const scene = document.querySelector('.architecture-scene');
+    if (!scene || typeof scene.pauseAnimations !== 'function') return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        scene.pauseAnimations();
+        return;
+    }
+
+    let inView = false;
+    const sync = () => {
+        if (inView && !document.hidden) scene.unpauseAnimations();
+        else scene.pauseAnimations();
+    };
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+            inView = entries[0].isIntersecting;
+            sync();
+        }, { threshold: 0.08 });
+        observer.observe(scene);
+    } else {
+        inView = true;
+        sync();
+    }
+
+    document.addEventListener('visibilitychange', sync);
+}
+
+function initArchitectureInteraction() {
+    const svg = document.querySelector('.architecture-scene');
+    const label = document.getElementById('architectureTraceLabel');
+    if (!svg || !label) return;
+
+    const routesByNode = {
+        client: ['route-client-api'],
+        gateway: ['route-client-api', 'route-api-auth', 'route-api-order', 'route-api-catalog'],
+        identity: ['route-api-auth', 'route-auth-cache'],
+        orders: ['route-api-order', 'route-order-db', 'route-order-bus'],
+        catalog: ['route-api-catalog', 'route-catalog-bus'],
+        cache: ['route-auth-cache'],
+        database: ['route-order-db'],
+        events: ['route-catalog-bus', 'route-order-bus']
+    };
+    const labelsByNode = {
+        client: 'WEB CLIENT → GATEWAY',
+        gateway: 'GATEWAY → DOMAIN SERVICES',
+        identity: 'IDENTITY → REDIS',
+        orders: 'ORDERS → SQL / EVENT BUS',
+        catalog: 'CATALOG → RABBITMQ',
+        cache: 'IDENTITY → REDIS CACHE',
+        database: 'ORDERS → SQL SERVER',
+        events: 'ASYNC EVENTS → RABBITMQ'
+    };
+    const nodes = [...svg.querySelectorAll('[data-map-node]')];
+    const routes = [...svg.querySelectorAll('.architecture-route')];
+    const packets = [...svg.querySelectorAll('.architecture-packet')];
+    let pinnedNode = null;
+    let hoveredNode = null;
+    let focusedNode = null;
+
+    function render() {
+        const node = focusedNode || hoveredNode || pinnedNode;
+        const key = node?.dataset.mapNode;
+        const connected = routesByNode[key] || [];
+        nodes.forEach(item => {
+            const isActive = item === node;
+            item.classList.toggle('is-active', isActive);
+            item.classList.toggle('is-dimmed', Boolean(node) && !isActive);
+            item.setAttribute('aria-pressed', String(pinnedNode === item));
+        });
+        routes.forEach(route => {
+            const isConnected = Boolean(node) && connected.includes(route.id);
+            route.classList.toggle('is-active', isConnected);
+            route.classList.toggle('is-muted', Boolean(node) && !isConnected);
+        });
+        packets.forEach(packet => packet.classList.toggle('is-muted', Boolean(node) && !connected.includes(packet.dataset.route)));
+        label.textContent = labelsByNode[key] || 'CHOOSE A NODE';
+    }
+
+    nodes.forEach(node => {
+        node.addEventListener('pointerenter', () => {
+            hoveredNode = node;
+            render();
+        });
+        node.addEventListener('pointerleave', () => {
+            if (hoveredNode === node) hoveredNode = null;
+            render();
+        });
+        node.addEventListener('focus', () => {
+            focusedNode = node;
+            render();
+        });
+        node.addEventListener('blur', () => {
+            if (focusedNode === node) focusedNode = null;
+            render();
+        });
+        node.addEventListener('click', () => {
+            pinnedNode = pinnedNode === node ? null : node;
+            render();
+        });
+        node.addEventListener('keydown', event => {
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            pinnedNode = pinnedNode === node ? null : node;
+            render();
+        });
+    });
+
+    svg.addEventListener('click', event => {
+        if (event.target.closest?.('[data-map-node]')) return;
+        pinnedNode = null;
+        render();
+    });
+
+    render();
+}
+
+function initSceneSpotlight() {
+    const scene = document.querySelector('.process-scene-band');
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!scene || !finePointer || reduceMotion) return;
+
+    let frame = 0;
+    scene.addEventListener('pointerenter', () => scene.classList.add('pointer-active'), { passive: true });
+    scene.addEventListener('pointermove', event => {
+        if (frame) cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => {
+            const bounds = scene.getBoundingClientRect();
+            scene.style.setProperty('--scene-pointer-x', `${event.clientX - bounds.left}px`);
+            scene.style.setProperty('--scene-pointer-y', `${event.clientY - bounds.top}px`);
+            frame = 0;
+        });
+    }, { passive: true });
+    scene.addEventListener('pointerleave', () => {
+        if (frame) cancelAnimationFrame(frame);
+        frame = 0;
+        scene.classList.remove('pointer-active');
+    }, { passive: true });
 }
 
 /* ============================================
@@ -452,35 +597,43 @@ function initCounters() {
 function initProjectFilter() {
     const filterTabs = document.querySelectorAll('.filter-button-tab');
     const projectCards = document.querySelectorAll('.showcase-card');
+    const status = document.getElementById('projectFilterStatus');
 
     if (!filterTabs.length || !projectCards.length) return;
 
     filterTabs.forEach(tab => {
         tab.addEventListener('click', function() {
             const filterValue = this.getAttribute('data-filter');
+            const enteringCards = [];
 
-            // Active tab state
-            filterTabs.forEach(t => t.classList.remove('active'));
-            this.classList.add('active');
+            filterTabs.forEach(t => {
+                const isActive = t === this;
+                t.classList.toggle('active', isActive);
+                t.setAttribute('aria-pressed', String(isActive));
+            });
 
-            // Filter cards
+            let visibleCount = 0;
             projectCards.forEach(card => {
                 const categoryAttr = card.getAttribute('data-category') || '';
                 const categories = categoryAttr.split(' ');
+                const matches = filterValue === 'all' || categories.includes(filterValue);
 
-                if (filterValue === 'all' || categories.includes(filterValue)) {
+                card.classList.remove('filter-entering');
+                if (matches) {
+                    visibleCount++;
                     card.classList.remove('hidden-project');
-                    card.style.opacity = '0';
-                    card.style.transform = 'scale(0.95)';
-                    requestAnimationFrame(() => {
-                        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1)';
-                    });
+                    card.style.setProperty('--filter-delay', `${Math.min(visibleCount - 1, 5) * 55}ms`);
+                    enteringCards.push(card);
                 } else {
                     card.classList.add('hidden-project');
                 }
             });
+
+            if (status) {
+                status.innerHTML = `Showing <strong>${visibleCount}</strong> ${visibleCount === 1 ? 'case study' : 'case studies'}`;
+            }
+
+            requestAnimationFrame(() => enteringCards.forEach(card => card.classList.add('filter-entering')));
         });
     });
 }
@@ -610,7 +763,7 @@ function initProjectModal() {
 function initRevealAnimations() {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const targets = document.querySelectorAll(
-        '.section-header-block, .bento-box, .matrix-category-card, .showcase-card, .journey-node, .counter-column, .contact-channel-card, .contact-form-box'
+        '.section-header-block, .bento-box, .architecture-feature, .process-scene-band, .matrix-category-card, .showcase-card, .journey-node, .counter-column, .contact-channel-card, .contact-form-box'
     );
 
     if (reduceMotion || !('IntersectionObserver' in window)) return;

@@ -484,6 +484,124 @@
                     </div>
                 </div>
 
+                <div class="architecture-feature">
+                    <div class="architecture-feature-copy">
+                        <span class="architecture-eyebrow"><span class="architecture-live-dot"></span> SYSTEMS IN MOTION</span>
+                        <h3>Designed to <span class="text-gradient">work together.</span></h3>
+                        <p>Good architecture is more than boxes on a diagram. It is a clear flow of requests, events, and data across services built to scale.</p>
+                        <div class="architecture-feature-meta">
+                            <span><i class="fas fa-route"></i> Event-driven flow</span>
+                            <span><i class="fas fa-shield-alt"></i> Resilient by design</span>
+                        </div>
+                    </div>
+
+                    <div class="architecture-map-shell">
+                        <div class="architecture-map-topline">
+                            <span>PAYON · MICROSERVICES TOPOLOGY</span>
+                            <span class="map-live-status"><i></i><span id="architectureTraceLabel" aria-live="polite" aria-atomic="true">CHOOSE A NODE</span></span>
+                        </div>
+                        <div class="architecture-map-scroll" tabindex="0" aria-label="Scrollable service topology diagram">
+                            <svg class="architecture-scene" viewBox="0 0 1000 480" role="img" aria-labelledby="architectureSceneTitle architectureSceneDesc">
+                                <title id="architectureSceneTitle">Animated PayOn service architecture</title>
+                                <desc id="architectureSceneDesc">Requests travel from a web client through a YARP and .NET gateway to identity, order and catalog services, then to Redis, SQL Server and RabbitMQ.</desc>
+                                <defs>
+                                    <pattern id="architectureGrid" width="32" height="32" patternUnits="userSpaceOnUse">
+                                        <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(220,235,213,.045)" stroke-width="1" />
+                                    </pattern>
+                                    <filter id="architectureGlow" x="-200%" y="-200%" width="400%" height="400%">
+                                        <feGaussianBlur stdDeviation="4" result="blur" />
+                                        <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                                    </filter>
+                                    <linearGradient id="routeGradient" x1="0" x2="1">
+                                        <stop offset="0" stop-color="#9ca9ff" stop-opacity=".18" />
+                                        <stop offset=".55" stop-color="#b9e65c" stop-opacity=".62" />
+                                        <stop offset="1" stop-color="#b9e65c" stop-opacity=".18" />
+                                    </linearGradient>
+                                </defs>
+                                <rect width="1000" height="480" rx="20" fill="url(#architectureGrid)" />
+
+                                <g class="architecture-routes" fill="none" stroke="url(#routeGradient)" stroke-width="1.5">
+                                    <path id="route-client-api" class="architecture-route" d="M206 240 C246 240 262 240 300 240" />
+                                    <path id="route-api-auth" class="architecture-route" d="M470 240 C520 240 518 128 560 128" />
+                                    <path id="route-api-order" class="architecture-route" d="M470 240 C510 240 525 240 560 240" />
+                                    <path id="route-api-catalog" class="architecture-route" d="M470 240 C520 240 518 352 560 352" />
+                                    <path id="route-auth-cache" class="architecture-route" d="M715 128 C756 128 772 135 815 135" />
+                                    <path id="route-order-db" class="architecture-route" d="M715 240 C755 240 775 240 815 240" />
+                                    <path id="route-catalog-bus" class="architecture-route architecture-route-secondary" d="M715 352 C756 352 775 352 815 352" />
+                                    <path id="route-order-bus" class="architecture-route architecture-route-secondary" d="M680 278 C680 420 862 425 875 390" />
+                                </g>
+
+                                <g class="architecture-packets" fill="#e3ff9c" filter="url(#architectureGlow)">
+                                    <circle class="architecture-packet" data-route="route-client-api" r="4"><animateMotion dur="2.8s" repeatCount="indefinite" path="M206 240 C246 240 262 240 300 240" /></circle>
+                                    <circle class="architecture-packet" data-route="route-api-auth" r="3.5"><animateMotion dur="3.5s" begin="-.9s" repeatCount="indefinite" path="M470 240 C520 240 518 128 560 128" /></circle>
+                                    <circle class="architecture-packet" data-route="route-api-order" r="4"><animateMotion dur="3s" begin="-1.4s" repeatCount="indefinite" path="M470 240 C510 240 525 240 560 240" /></circle>
+                                    <circle class="architecture-packet" data-route="route-api-catalog" r="3.5"><animateMotion dur="3.8s" begin="-2s" repeatCount="indefinite" path="M470 240 C520 240 518 352 560 352" /></circle>
+                                    <circle class="architecture-packet" data-route="route-auth-cache" r="3"><animateMotion dur="3.3s" begin="-1.2s" repeatCount="indefinite" path="M715 128 C756 128 772 135 815 135" /></circle>
+                                    <circle class="architecture-packet" data-route="route-order-db" r="3.5"><animateMotion dur="3.1s" begin="-.6s" repeatCount="indefinite" path="M715 240 C755 240 775 240 815 240" /></circle>
+                                    <circle class="architecture-packet architecture-packet-event" data-route="route-catalog-bus" r="3"><animateMotion dur="3.6s" begin="-2.2s" repeatCount="indefinite" path="M715 352 C756 352 775 352 815 352" /></circle>
+                                    <circle class="architecture-packet architecture-packet-event" data-route="route-order-bus" r="3"><animateMotion dur="4.4s" begin="-2.9s" repeatCount="indefinite" path="M680 278 C680 420 862 425 875 390" /></circle>
+                                </g>
+
+                                <g class="architecture-node architecture-node-client" data-map-node="client" tabindex="0" role="button" aria-label="Web client. Show request flow to the gateway." aria-pressed="false">
+                                    <rect x="56" y="202" width="150" height="76" rx="13" />
+                                    <circle class="architecture-node-icon" cx="82" cy="240" r="12" />
+                                    <text class="architecture-node-kicker" x="102" y="232">CLIENT</text>
+                                    <text class="architecture-node-title" x="102" y="251">Web client</text>
+                                </g>
+                                <g class="architecture-node architecture-node-gateway" data-map-node="gateway" tabindex="0" role="button" aria-label="YARP and .NET gateway. Show gateway routes to services." aria-pressed="false">
+                                    <rect x="300" y="186" width="170" height="108" rx="16" />
+                                    <circle class="gateway-pulse" cx="385" cy="240" r="43" />
+                                    <circle class="architecture-node-icon" cx="339" cy="240" r="13" />
+                                    <text class="architecture-node-kicker" x="362" y="231">API GATEWAY</text>
+                                    <text class="architecture-node-title" x="362" y="253">YARP · .NET</text>
+                                    <text class="architecture-node-caption" x="323" y="278">AUTH · ROUTING · POLICY</text>
+                                </g>
+                                <g class="architecture-node" data-map-node="identity" tabindex="0" role="button" aria-label="Identity service. Show the path to Redis." aria-pressed="false">
+                                    <rect x="560" y="92" width="155" height="72" rx="12" />
+                                    <circle class="architecture-node-icon" cx="585" cy="128" r="10" />
+                                    <text class="architecture-node-kicker" x="604" y="122">IDENTITY</text>
+                                    <text class="architecture-node-title" x="604" y="143">JWT · 2FA</text>
+                                </g>
+                                <g class="architecture-node architecture-node-emphasis" data-map-node="orders" tabindex="0" role="button" aria-label="Order service. Show database and event bus routes." aria-pressed="false">
+                                    <rect x="560" y="204" width="155" height="72" rx="12" />
+                                    <circle class="architecture-node-icon" cx="585" cy="240" r="10" />
+                                    <text class="architecture-node-kicker" x="604" y="234">ORDERS</text>
+                                    <text class="architecture-node-title" x="604" y="255">Order service</text>
+                                </g>
+                                <g class="architecture-node" data-map-node="catalog" tabindex="0" role="button" aria-label="Catalog service. Show its event bus route." aria-pressed="false">
+                                    <rect x="560" y="316" width="155" height="72" rx="12" />
+                                    <circle class="architecture-node-icon" cx="585" cy="352" r="10" />
+                                    <text class="architecture-node-kicker" x="604" y="346">CATALOG</text>
+                                    <text class="architecture-node-title" x="604" y="367">Domain service</text>
+                                </g>
+                                <g class="architecture-node architecture-node-storage" data-map-node="cache" tabindex="0" role="button" aria-label="Redis cache. Show the identity cache route." aria-pressed="false">
+                                    <rect x="815" y="99" width="140" height="72" rx="12" />
+                                    <circle class="architecture-node-icon" cx="839" cy="135" r="10" />
+                                    <text class="architecture-node-kicker" x="858" y="129">CACHE</text>
+                                    <text class="architecture-node-title" x="858" y="150">Redis</text>
+                                </g>
+                                <g class="architecture-node architecture-node-storage" data-map-node="database" tabindex="0" role="button" aria-label="SQL Server. Show the order database route." aria-pressed="false">
+                                    <rect x="815" y="204" width="140" height="72" rx="12" />
+                                    <circle class="architecture-node-icon" cx="839" cy="240" r="10" />
+                                    <text class="architecture-node-kicker" x="858" y="234">DATABASE</text>
+                                    <text class="architecture-node-title" x="858" y="255">SQL Server</text>
+                                </g>
+                                <g class="architecture-node architecture-node-message" data-map-node="events" tabindex="0" role="button" aria-label="RabbitMQ event bus. Show incoming event routes." aria-pressed="false">
+                                    <rect x="815" y="316" width="140" height="72" rx="12" />
+                                    <circle class="architecture-node-icon" cx="839" cy="352" r="10" />
+                                    <text class="architecture-node-kicker" x="858" y="346">EVENT BUS</text>
+                                    <text class="architecture-node-title" x="858" y="367">RabbitMQ</text>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="architecture-map-legend">
+                            <span><i class="legend-swatch request"></i> Request flow</span>
+                            <span><i class="legend-swatch event"></i> Async events</span>
+                            <span class="architecture-map-caption">YARP · MASSTRANSIT · DISTRIBUTED SYSTEMS</span>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Stats Strip -->
                 <div class="stats-banner-wrap" id="statsCounterStrip">
                     <div class="counter-column">
@@ -506,6 +624,22 @@
             </div>
         </section>
 
+        <!-- ==================== ENGINEERING SCENE ==================== -->
+        <section class="process-scene-band" aria-labelledby="processSceneTitle">
+            <div class="process-scene-art" aria-hidden="true">
+                <img src="assets/engineering-landscape.png" alt="" loading="lazy">
+            </div>
+            <div class="process-scene-signal" aria-hidden="true"></div>
+            <div class="process-scene-spotlight" aria-hidden="true"></div>
+            <div class="process-scene-content">
+                <span class="process-scene-eyebrow"><span class="scene-index">01</span> ENGINEERED FOR THE REAL WORLD</span>
+                <h2 id="processSceneTitle">Complexity,<br><span>shaped into clarity.</span></h2>
+                <p>Reliable backends begin with clear boundaries, thoughtful data flow, and systems built to handle change.</p>
+                <a href="#projects" class="process-scene-link">Explore selected projects <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="process-scene-caption" aria-hidden="true">ARCHITECTURE / 001 <span>•</span> CAIRO, EGYPT</div>
+        </section>
+
         <!-- ==================== FEATURED PROJECTS SECTION ==================== -->
         <section id="projects" class="section-wrapper">
             <div class="container-custom">
@@ -518,13 +652,14 @@
                 </div>
 
                 <!-- Filter Tabs -->
-                <div class="projects-filter-bar">
-                    <button class="filter-button-tab active" data-filter="all">All Projects</button>
-                    <button class="filter-button-tab" data-filter="fullstack">Full Stack</button>
-                    <button class="filter-button-tab" data-filter="backend">Backend & API</button>
-                    <button class="filter-button-tab" data-filter="microservices">Microservices</button>
-                    <button class="filter-button-tab" data-filter="frontend">Frontend</button>
+                <div class="projects-filter-bar" role="group" aria-label="Filter projects by focus area">
+                    <button class="filter-button-tab active" data-filter="all" aria-pressed="true">All Projects</button>
+                    <button class="filter-button-tab" data-filter="fullstack" aria-pressed="false">Full Stack</button>
+                    <button class="filter-button-tab" data-filter="backend" aria-pressed="false">Backend & API</button>
+                    <button class="filter-button-tab" data-filter="microservices" aria-pressed="false">Microservices</button>
+                    <button class="filter-button-tab" data-filter="frontend" aria-pressed="false">Frontend</button>
                 </div>
+                <p class="projects-filter-status" id="projectFilterStatus" role="status" aria-live="polite">Showing <strong>11</strong> case studies</p>
 
                 <!-- Projects Grid -->
                 <div class="projects-showcase-grid" id="projectsShowcaseGrid">
@@ -532,7 +667,7 @@
                     <!-- 1. PayOn - Graduation Project (Grade A+) -->
                     <div class="showcase-card payon-spotlight" data-category="fullstack backend" data-project="payon">
                         <div class="card-media-wrap">
-                            <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="PayOn Fintech Platform" loading="lazy">
+                            <img src="assets/payon-fintech-art.png" alt="A floating graphite digital wallet surrounded by luminous payment paths" loading="lazy">
                             <div class="media-shade-layer"></div>
                             <span class="media-corner-badge gold"><i class="fas fa-trophy text-yellow-300"></i> Grade A+ (Distinction)</span>
                             <div class="card-heading-overlay">
@@ -1028,7 +1163,7 @@
                 title: '💳 PayOn Fintech Platform',
                 subtitle: 'Graduation Project · Grade A+ (Distinction)',
                 description: 'A scalable multi-tenant digital banking, wallet, and financial settlement platform engineered with Clean Architecture, CQRS, and Event-Driven patterns. Honored with Grade A+ (Distinction) as a graduation project from Benha University.',
-                image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                image: 'assets/payon-fintech-art.png',
                 technologies: ['.NET 8', 'Clean Architecture', 'CQRS & MediatR', 'EF Core', 'Redis Caching', 'SQL Server', 'Angular 18', 'JWT & Identity', 'Stripe & PayPal'],
                 features: [
                     'Multi-Tenant Architecture & Digital Wallet Management',
