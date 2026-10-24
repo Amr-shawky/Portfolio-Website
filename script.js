@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCounters();
     initProjectFilter();
     initProjectModal();
+    initRevealAnimations();
     initContactForm();
     initFooterYear();
 });
@@ -286,9 +287,12 @@ function initProjectModal() {
 
     if (!overlay || !dialog || !bodyContainer) return;
 
+    let previousOverflow = '';
+    let lastFocusedElement = null;
+
     function openModal(projectId) {
-        const data = window.projectsData ? window.projectsData[projectId] : null;
-        if (!data) return;
+        const data = window.projectsData?.[projectId];
+        if (!data || !Array.isArray(data.technologies) || !Array.isArray(data.features)) return;
 
         const isLive = data.isLive || false;
         const actionBtnLabel = isLive ? 'Visit Live Portal' : 'View Source Code';
@@ -307,7 +311,7 @@ function initProjectModal() {
                 <img src="${data.image}" alt="${data.title}">
                 <div class="modal-banner-gradient"></div>
                 <div class="modal-banner-titlebox">
-                    <h1>${data.title}</h1>
+                    <h1 id="modalProjectTitle">${data.title}</h1>
                     <p>${data.subtitle}</p>
                 </div>
             </div>
@@ -334,8 +338,13 @@ function initProjectModal() {
             </div>
         `;
 
+        lastFocusedElement = document.activeElement;
+        previousOverflow = document.body.style.overflow;
+        overlay.setAttribute('aria-hidden', 'false');
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
+        dialog.scrollTop = 0;
+        closeBtn?.focus();
 
         // Inner close button
         const innerClose = document.getElementById('modalInnerCloseBtn');
@@ -345,13 +354,16 @@ function initProjectModal() {
     }
 
     function closeModal() {
+        if (!overlay.classList.contains('active')) return;
         overlay.classList.remove('active');
-        document.body.style.overflow = '';
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = previousOverflow;
+        lastFocusedElement?.focus();
     }
 
     // Card click triggers
     document.addEventListener('click', e => {
-        const trigger = e.target.closest('[data-project]');
+        const trigger = e.target.closest('.view-project-btn, .showcase-card[data-project]');
         if (trigger) {
             // If clicking direct github external link, don't open modal
             if (e.target.closest('a[href^="http"]')) return;
@@ -380,6 +392,32 @@ function initProjectModal() {
         if (e.key === 'Escape' && overlay.classList.contains('active')) {
             closeModal();
         }
+    });
+}
+
+/* ============================================
+   9. SCROLL REVEAL MOTION
+   ============================================ */
+function initRevealAnimations() {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const targets = document.querySelectorAll(
+        '.section-header-block, .bento-box, .matrix-category-card, .showcase-card, .journey-node, .counter-column, .contact-channel-card, .contact-form-box'
+    );
+
+    if (reduceMotion || !('IntersectionObserver' in window)) return;
+
+    document.documentElement.classList.add('motion-ready');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('motion-visible');
+            observer.unobserve(entry.target);
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -36px 0px' });
+
+    targets.forEach((target, index) => {
+        target.style.setProperty('--motion-delay', `${Math.min(index % 4, 3) * 70}ms`);
+        observer.observe(target);
     });
 }
 
