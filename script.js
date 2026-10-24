@@ -5,6 +5,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     initPreloader();
+    initHeroScene();
+    initCardTilt();
     initScrollProgress();
     initNavbar();
     initBackToTop();
@@ -16,6 +18,203 @@ document.addEventListener('DOMContentLoaded', () => {
     initContactForm();
     initFooterYear();
 });
+
+/* Ambient orbital network scene for the hero artwork */
+function initHeroScene() {
+    const canvas = document.getElementById('heroScene');
+    const hero = document.getElementById('home');
+    const ctx = canvas?.getContext('2d');
+    if (!canvas || !hero || !ctx) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const particles = [];
+    let width = 0;
+    let height = 0;
+    let frameId = 0;
+    let lastFrame = 0;
+    let inView = true;
+    let pageVisible = !document.hidden;
+    let pointerTargetX = 0;
+    let pointerTargetY = 0;
+    let pointerX = 0;
+    let pointerY = 0;
+    const particleCount = window.innerWidth < 700 ? 20 : 38;
+
+    function resize() {
+        const bounds = hero.getBoundingClientRect();
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        width = bounds.width;
+        height = bounds.height;
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        particles.length = 0;
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: width * (0.43 + Math.random() * 0.55),
+                y: height * (0.05 + Math.random() * 0.9),
+                vx: (Math.random() - 0.5) * 0.12,
+                vy: (Math.random() - 0.5) * 0.12,
+                radius: 0.8 + Math.random() * 1.5,
+                phase: Math.random() * Math.PI * 2,
+                tone: Math.random() > 0.76 ? 'blue' : 'lime'
+            });
+        }
+        draw(0);
+    }
+
+    function draw(time) {
+        ctx.clearRect(0, 0, width, height);
+        if (!width || !height) return;
+
+        pointerX += (pointerTargetX - pointerX) * 0.035;
+        pointerY += (pointerTargetY - pointerY) * 0.035;
+        const centerX = width * (width < 700 ? 0.69 : 0.76) + pointerX * width * 0.018;
+        const centerY = height * (width < 700 ? 0.32 : 0.48) + pointerY * height * 0.022;
+        const orbitScale = Math.min(width, height);
+        const motionTime = reduceMotion ? 0 : time * 0.00016;
+
+        // Three glass-like orbital paths echo the generated architecture artwork.
+        const orbits = [
+            { x: orbitScale * 0.22, y: orbitScale * 0.085, rotation: -0.34, phase: 0.2 },
+            { x: orbitScale * 0.17, y: orbitScale * 0.12, rotation: 0.62, phase: 2.1 },
+            { x: orbitScale * 0.27, y: orbitScale * 0.045, rotation: -0.92, phase: 4.0 }
+        ];
+
+        ctx.save();
+        ctx.globalCompositeOperation = 'screen';
+        orbits.forEach((orbit, index) => {
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.rotate(orbit.rotation + Math.sin(motionTime + index) * 0.035);
+            ctx.beginPath();
+            ctx.ellipse(0, 0, orbit.x, orbit.y, 0, 0, Math.PI * 2);
+            ctx.strokeStyle = index === 1 ? 'rgba(183, 204, 255, 0.12)' : 'rgba(203, 241, 124, 0.13)';
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+
+            const angle = motionTime * (index % 2 ? -1 : 1) + orbit.phase;
+            const nodeX = Math.cos(angle) * orbit.x;
+            const nodeY = Math.sin(angle) * orbit.y;
+            ctx.beginPath();
+            ctx.arc(nodeX, nodeY, 2.1, 0, Math.PI * 2);
+            ctx.fillStyle = index === 1 ? 'rgba(166, 192, 255, 0.92)' : 'rgba(216, 248, 151, 0.95)';
+            ctx.shadowColor = index === 1 ? 'rgba(116, 156, 255, 0.7)' : 'rgba(198, 237, 112, 0.75)';
+            ctx.shadowBlur = 14;
+            ctx.fill();
+            ctx.restore();
+        });
+
+        // Fine connections and drifting nodes form a quiet, living system map.
+        particles.forEach((particle, index) => {
+            if (!reduceMotion) {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+                if (particle.x < width * 0.4 || particle.x > width * 1.01) particle.vx *= -1;
+                if (particle.y < 0 || particle.y > height) particle.vy *= -1;
+            }
+
+            for (let next = index + 1; next < particles.length; next++) {
+                const other = particles[next];
+                const dx = particle.x - other.x;
+                const dy = particle.y - other.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance > 112) continue;
+                const alpha = (1 - distance / 112) * 0.13;
+                ctx.beginPath();
+                ctx.moveTo(particle.x, particle.y);
+                ctx.lineTo(other.x, other.y);
+                ctx.strokeStyle = `rgba(190, 220, 155, ${alpha})`;
+                ctx.lineWidth = 0.65;
+                ctx.stroke();
+            }
+
+            const pulse = 0.55 + (Math.sin(time * 0.0012 + particle.phase) + 1) * 0.18;
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+            ctx.fillStyle = particle.tone === 'blue'
+                ? `rgba(157, 185, 255, ${pulse * 0.6})`
+                : `rgba(210, 241, 153, ${pulse * 0.52})`;
+            ctx.fill();
+        });
+        ctx.restore();
+    }
+
+    function animate(time) {
+        frameId = 0;
+        if (reduceMotion || !inView || !pageVisible) return;
+        if (time - lastFrame >= 32) {
+            draw(time);
+            lastFrame = time;
+        }
+        frameId = requestAnimationFrame(animate);
+    }
+
+    function syncAnimation() {
+        if (reduceMotion || !inView || !pageVisible) {
+            if (frameId) cancelAnimationFrame(frameId);
+            frameId = 0;
+            return;
+        }
+        if (!frameId) frameId = requestAnimationFrame(animate);
+    }
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+            inView = entries[0].isIntersecting;
+            syncAnimation();
+        }, { threshold: 0.01 });
+        observer.observe(hero);
+    }
+    document.addEventListener('visibilitychange', () => {
+        pageVisible = !document.hidden;
+        syncAnimation();
+    });
+    if (!reduceMotion) {
+        hero.addEventListener('pointermove', event => {
+            if (event.pointerType === 'touch') return;
+            const bounds = hero.getBoundingClientRect();
+            pointerTargetX = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+            pointerTargetY = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+        }, { passive: true });
+        hero.addEventListener('pointerleave', () => {
+            pointerTargetX = 0;
+            pointerTargetY = 0;
+        }, { passive: true });
+    }
+    window.addEventListener('resize', resize, { passive: true });
+    resize();
+    syncAnimation();
+}
+
+function initCardTilt() {
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!finePointer || reduceMotion) return;
+
+    document.querySelectorAll('.showcase-card').forEach(card => {
+        let pendingFrame = 0;
+        card.addEventListener('pointermove', event => {
+            if (pendingFrame) cancelAnimationFrame(pendingFrame);
+            pendingFrame = requestAnimationFrame(() => {
+                const bounds = card.getBoundingClientRect();
+                const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+                const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+                card.style.setProperty('--card-tilt-x', `${(x * 3).toFixed(2)}deg`);
+                card.style.setProperty('--card-tilt-y', `${(y * -3).toFixed(2)}deg`);
+                pendingFrame = 0;
+            });
+        }, { passive: true });
+
+        card.addEventListener('pointerleave', () => {
+            if (pendingFrame) cancelAnimationFrame(pendingFrame);
+            pendingFrame = 0;
+            card.style.setProperty('--card-tilt-x', '0deg');
+            card.style.setProperty('--card-tilt-y', '0deg');
+        }, { passive: true });
+    });
+}
 
 /* ============================================
    1. PRELOADER
