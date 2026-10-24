@@ -983,11 +983,37 @@ body {
 .journey-stream {
     position: relative;
     padding-left: 28px;
-    border-left: 2px solid rgba(255, 255, 255, 0.08);
+    border-left: 2px solid transparent;
 }
+
+.journey-stream::before,
+.journey-stream::after {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    pointer-events: none;
+}
+
+.journey-stream::before {
+    background: linear-gradient(180deg, rgba(217, 235, 204, 0.09), rgba(217, 235, 204, 0.035));
+}
+
+.journey-stream::after {
+    background: linear-gradient(180deg, transparent, rgba(201, 241, 126, 0.82) 48%, rgba(180, 203, 255, 0.62) 55%, transparent);
+    background-size: 100% 150px;
+    background-repeat: no-repeat;
+    animation: journey-signal-flow 5.4s cubic-bezier(0.55, 0, 0.35, 1) infinite;
+    filter: drop-shadow(0 0 4px rgba(193, 232, 116, 0.38));
+}
+
+.journey-column:nth-child(2) .journey-stream::after { animation-delay: -2.7s; }
 
 .journey-node {
     position: relative;
+    z-index: 1;
     padding-bottom: 40px;
 }
 
@@ -2439,6 +2465,7 @@ body {
 @keyframes scene-copy-arrive { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes payon-light-pass { 0%, 12% { background-position: 130% 0; opacity: 0; } 24% { opacity: 0.78; } 48% { opacity: 0.58; } 66%, 100% { background-position: -30% 0; opacity: 0; } }
 @keyframes project-card-arrive { from { opacity: 0; filter: blur(5px); } to { opacity: 1; filter: blur(0); } }
+@keyframes journey-signal-flow { 0%, 10% { background-position: 0 -150px; opacity: 0; } 22% { opacity: 0.9; } 76% { opacity: 0.76; } 100% { background-position: 0 100%; opacity: 0; } }
 @keyframes route-flow { to { stroke-dashoffset: -128; } }
 @keyframes gateway-pulse { 0% { opacity: 0.75; transform: scale(0.65); } 85%, 100% { opacity: 0; transform: scale(1.45); } }
 @keyframes signal-pulse { 0% { box-shadow: 0 0 0 0 rgba(199, 240, 104, 0.5), 0 0 12px rgba(199, 240, 104, 0.75); } 100% { box-shadow: 0 0 0 8px rgba(199, 240, 104, 0), 0 0 12px rgba(199, 240, 104, 0.15); } }
