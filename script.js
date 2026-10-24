@@ -38,7 +38,7 @@ function initHeroScene() {
     let pointerTargetY = 0;
     let pointerX = 0;
     let pointerY = 0;
-    const particleCount = window.innerWidth < 700 ? 20 : 38;
+    const particleCount = window.innerWidth < 700 ? 26 : 54;
 
     function resize() {
         const bounds = hero.getBoundingClientRect();
@@ -54,9 +54,9 @@ function initHeroScene() {
             particles.push({
                 x: width * (0.43 + Math.random() * 0.55),
                 y: height * (0.05 + Math.random() * 0.9),
-                vx: (Math.random() - 0.5) * 0.12,
-                vy: (Math.random() - 0.5) * 0.12,
-                radius: 0.8 + Math.random() * 1.5,
+                vx: (Math.random() - 0.5) * 0.22,
+                vy: (Math.random() - 0.5) * 0.22,
+                radius: 1 + Math.random() * 1.9,
                 phase: Math.random() * Math.PI * 2,
                 tone: Math.random() > 0.76 ? 'blue' : 'lime'
             });
@@ -73,13 +73,22 @@ function initHeroScene() {
         const centerX = width * (width < 700 ? 0.69 : 0.76) + pointerX * width * 0.018;
         const centerY = height * (width < 700 ? 0.32 : 0.48) + pointerY * height * 0.022;
         const orbitScale = Math.min(width, height);
-        const motionTime = reduceMotion ? 0 : time * 0.00016;
+        const motionTime = reduceMotion ? 0 : time * 0.00042;
+
+        const coreGlow = ctx.createRadialGradient(centerX, centerY, 2, centerX, centerY, orbitScale * 0.15);
+        coreGlow.addColorStop(0, 'rgba(201, 238, 112, 0.2)');
+        coreGlow.addColorStop(0.28, 'rgba(145, 190, 88, 0.075)');
+        coreGlow.addColorStop(1, 'rgba(145, 190, 88, 0)');
+        ctx.fillStyle = coreGlow;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, orbitScale * 0.15, 0, Math.PI * 2);
+        ctx.fill();
 
         // Three glass-like orbital paths echo the generated architecture artwork.
         const orbits = [
-            { x: orbitScale * 0.22, y: orbitScale * 0.085, rotation: -0.34, phase: 0.2 },
-            { x: orbitScale * 0.17, y: orbitScale * 0.12, rotation: 0.62, phase: 2.1 },
-            { x: orbitScale * 0.27, y: orbitScale * 0.045, rotation: -0.92, phase: 4.0 }
+            { x: orbitScale * 0.29, y: orbitScale * 0.13, rotation: -0.34, phase: 0.2 },
+            { x: orbitScale * 0.22, y: orbitScale * 0.18, rotation: 0.62, phase: 2.1 },
+            { x: orbitScale * 0.35, y: orbitScale * 0.075, rotation: -0.92, phase: 4.0 }
         ];
 
         ctx.save();
@@ -87,26 +96,27 @@ function initHeroScene() {
         orbits.forEach((orbit, index) => {
             ctx.save();
             ctx.translate(centerX, centerY);
-            ctx.rotate(orbit.rotation + Math.sin(motionTime + index) * 0.035);
+            ctx.rotate(orbit.rotation + Math.sin(motionTime * 0.7 + index) * 0.18);
             ctx.beginPath();
             ctx.ellipse(0, 0, orbit.x, orbit.y, 0, 0, Math.PI * 2);
-            ctx.strokeStyle = index === 1 ? 'rgba(183, 204, 255, 0.12)' : 'rgba(203, 241, 124, 0.13)';
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = index === 1 ? 'rgba(183, 204, 255, 0.3)' : 'rgba(203, 241, 124, 0.28)';
+            ctx.lineWidth = 1.1;
             ctx.stroke();
 
-            const angle = motionTime * (index % 2 ? -1 : 1) + orbit.phase;
+            const angle = motionTime * (index % 2 ? -1.15 : 1) + orbit.phase;
             const nodeX = Math.cos(angle) * orbit.x;
             const nodeY = Math.sin(angle) * orbit.y;
             ctx.beginPath();
-            ctx.arc(nodeX, nodeY, 2.1, 0, Math.PI * 2);
-            ctx.fillStyle = index === 1 ? 'rgba(166, 192, 255, 0.92)' : 'rgba(216, 248, 151, 0.95)';
-            ctx.shadowColor = index === 1 ? 'rgba(116, 156, 255, 0.7)' : 'rgba(198, 237, 112, 0.75)';
-            ctx.shadowBlur = 14;
+            ctx.arc(nodeX, nodeY, 3 + Math.sin(motionTime * 2 + index) * 0.8, 0, Math.PI * 2);
+            ctx.fillStyle = index === 1 ? 'rgba(182, 204, 255, 0.98)' : 'rgba(224, 255, 165, 1)';
+            ctx.shadowColor = index === 1 ? 'rgba(116, 156, 255, 0.95)' : 'rgba(198, 237, 112, 1)';
+            ctx.shadowBlur = 25;
             ctx.fill();
             ctx.restore();
         });
 
         // Fine connections and drifting nodes form a quiet, living system map.
+        ctx.shadowBlur = 0;
         particles.forEach((particle, index) => {
             if (!reduceMotion) {
                 particle.x += particle.vx;
@@ -120,17 +130,17 @@ function initHeroScene() {
                 const dx = particle.x - other.x;
                 const dy = particle.y - other.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance > 112) continue;
-                const alpha = (1 - distance / 112) * 0.13;
+                if (distance > 145) continue;
+                const alpha = (1 - distance / 145) * 0.24;
                 ctx.beginPath();
                 ctx.moveTo(particle.x, particle.y);
                 ctx.lineTo(other.x, other.y);
                 ctx.strokeStyle = `rgba(190, 220, 155, ${alpha})`;
-                ctx.lineWidth = 0.65;
+                ctx.lineWidth = 0.85;
                 ctx.stroke();
             }
 
-            const pulse = 0.55 + (Math.sin(time * 0.0012 + particle.phase) + 1) * 0.18;
+            const pulse = 0.48 + (Math.sin(time * 0.002 + particle.phase) + 1) * 0.25;
             ctx.beginPath();
             ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
             ctx.fillStyle = particle.tone === 'blue'

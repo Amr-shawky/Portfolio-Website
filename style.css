@@ -2047,10 +2047,10 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    opacity: 0.82;
+    opacity: 1;
     mix-blend-mode: screen;
-    -webkit-mask-image: linear-gradient(90deg, transparent 8%, rgba(0, 0, 0, 0.28) 36%, #000 61%);
-    mask-image: linear-gradient(90deg, transparent 8%, rgba(0, 0, 0, 0.28) 36%, #000 61%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 16%, rgba(0, 0, 0, 0.65) 37%, #000 55%);
+    mask-image: linear-gradient(90deg, transparent 16%, rgba(0, 0, 0, 0.65) 37%, #000 55%);
 }
 
 .hero-section::before,
@@ -2066,7 +2066,9 @@ body {
     background-image: url('assets/architecture-hero.png');
     background-size: cover;
     background-position: center 46%;
-    opacity: 0.72;
+    opacity: 0.84;
+    background-size: 108% auto;
+    animation: hero-art-drift 22s ease-in-out infinite alternate;
 }
 
 .hero-section::after {
@@ -2153,18 +2155,18 @@ body {
 .hero-visual-wrapper::before {
     width: min(39vw, 500px);
     aspect-ratio: 1;
-    border: 1px solid rgba(220, 239, 197, 0.1);
+    border: 1px solid rgba(220, 239, 197, 0.24);
     border-radius: 50%;
     background: radial-gradient(circle at 50% 0%, rgba(210, 242, 146, 0.9) 0 2px, transparent 3px);
-    animation: orbit-turn 38s linear infinite;
+    animation: orbit-turn 18s linear infinite;
 }
 .hero-visual-wrapper::after {
     width: min(33vw, 420px);
     height: min(13vw, 168px);
-    border: 1px solid rgba(166, 192, 255, 0.12);
+    border: 1px solid rgba(166, 192, 255, 0.2);
     border-radius: 50%;
     box-shadow: 0 0 28px rgba(166, 192, 255, 0.035);
-    animation: orbit-turn-reverse 46s linear infinite;
+    animation: orbit-turn-reverse 24s linear infinite;
 }
 .portrait-frame { z-index: 1; }
 .portrait-frame::before {
@@ -2224,8 +2226,8 @@ body {
 }
 
 @media (max-width: 1024px) {
-    .hero-section::before { background-position: 62% center; opacity: 0.52; }
-    .hero-scene-canvas { opacity: 0.62; }
+    .hero-section::before { background-position: 62% center; opacity: 0.66; }
+    .hero-scene-canvas { opacity: 0.82; }
     .hero-visual-wrapper::before { width: min(72vw, 430px); }
     .hero-visual-wrapper::after { width: min(61vw, 360px); height: min(24vw, 145px); }
     .hero-section::after {
@@ -2236,11 +2238,16 @@ body {
 
 @media (max-width: 768px) {
     .hero-section { min-height: auto; }
-    .hero-section::before { background-position: 67% top; opacity: 0.38; }
+    .hero-section::before {
+        background-position: 67% top;
+        opacity: 0.52;
+        background-size: auto 100%;
+        animation-name: hero-art-drift-mobile;
+    }
     .hero-visual-wrapper::before { width: min(92vw, 365px); }
     .hero-visual-wrapper::after { width: min(77vw, 305px); height: min(31vw, 122px); }
     .hero-scene-canvas {
-        opacity: 0.36;
+        opacity: 0.58;
         -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.3) 48%, transparent 88%);
         mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.3) 48%, transparent 88%);
     }
@@ -2332,6 +2339,14 @@ body {
 @keyframes modal-image-in {
     from { transform: scale(1.045); }
     to { transform: scale(1); }
+}
+@keyframes hero-art-drift {
+    from { background-position: 50% 43%; }
+    to { background-position: 50% 57%; }
+}
+@keyframes hero-art-drift-mobile {
+    from { background-position: 67% 2%; }
+    to { background-position: 67% 8%; }
 }
 @keyframes orbit-turn {
     from { transform: translate(-50%, -50%) rotate(0deg); }
